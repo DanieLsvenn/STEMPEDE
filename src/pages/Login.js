@@ -5,7 +5,24 @@ import { FaEyeSlash } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
 const Login = () => {
-    const [showPassword,setShowPassword] = useState(true)
+    const [showPassword,setShowPassword] = useState(false)
+
+    const [data,setData] = useState({
+        email : "",
+        password : ""
+    })
+
+    const handleOnChange = (e) =>{
+        const { name , value } = e.target
+
+        setData((preve)=>{
+            return{
+                ...preve,
+                [name] : value
+            }
+        })
+    }
+
   return (
     <section id='login'>
         <div className='mx-auto container px-4 py-5'>
@@ -18,14 +35,27 @@ const Login = () => {
                     <div className='grid'>
                         <label>Email : </label>
                         <div className='bg-slate-100 p-2'>
-                            <input className='w-full h-full outline-none bg-transparent' type='email' placeholder='Enter email credentials'/>
+                            <input 
+                            className='w-full h-full outline-none bg-transparent'
+                            name='email'
+                            value={data.email}
+                            onChange={handleOnChange} 
+                            type='email' 
+                            placeholder='Enter email credentials'/>
                         </div>
                     </div>
 
                     <div>
                         <label>Password : </label>
                         <div className='bg-slate-100 p-2 flex'>
-                            <input className='w-full h-full outline-none bg-transparent' type={showPassword ? "text" : "password"} placeholder='Enter password'/>
+                            <input 
+                            className='w-full h-full outline-none bg-transparent' 
+                            name='password'
+                            value={data.password}
+                            onChange={handleOnChange} 
+                            type={showPassword ? "text" : "password"} 
+                            placeholder='Enter password'
+                            />
 
                             <div className='cursor-pointer text-xl' onClick={()=>setShowPassword((prev)=>!prev)}>
                                 <span>
