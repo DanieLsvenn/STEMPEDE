@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { FaFacebook } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
     // const [data,setData] = useState({
@@ -39,6 +41,10 @@ const Footer = () => {
             <div className='footer-section'>
                 <h3>Contact Us</h3>
                 <p>We are a team of developers who are passionate about creating beautiful and functional websites.</p>
+                <div className='flex gap-2 gy-2'>
+                    <FaFacebook/>
+                    <FaXTwitter/>
+                </div>
             </div>
         </div>
 
