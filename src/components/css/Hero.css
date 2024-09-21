@@ -205,15 +205,6 @@
 
 /* running time */
 
-.carousel .time{
-    position: absolute;
-    z-index: 1000;
-    width: 0%;
-    height: 3px;
-    background-color: #f1683a;
-    left: 0;
-    top: 0;
-}
 
 .carousel.next .time,
 .carousel.prev .time{

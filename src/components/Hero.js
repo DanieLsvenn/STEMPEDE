@@ -20,21 +20,25 @@ const Hero = () => {
     const showSlider = (type) => {
       const sliderItemsDom = sliderRef.current.querySelectorAll('.item');
       const thumbnailItemsDom = thumbnailBorderRef.current.querySelectorAll('.item');
-      
-      if (type === 'next') {
-        sliderRef.current.appendChild(sliderItemsDom[0]);
-        thumbnailBorderRef.current.appendChild(thumbnailItemsDom[0]);
-        carouselRef.current.classList.add('next');
-      } else {
-        sliderRef.current.prepend(sliderItemsDom[sliderItemsDom.length - 1]);
-        thumbnailBorderRef.current.prepend(thumbnailItemsDom[thumbnailItemsDom.length - 1]);
-        carouselRef.current.classList.add('prev');
-      }
 
-      setTimeout(() => {
-        carouselRef.current.classList.remove('next');
-        carouselRef.current.classList.remove('prev');
-      }, timeRunning);
+      if (!sliderItemsDom || !thumbnailItemsDom || !carouselRef.current) return;
+      
+      if (carouselRef.current) {
+        if (type === 'next') {
+          sliderRef.current.appendChild(sliderItemsDom[0]);
+          thumbnailBorderRef.current.appendChild(thumbnailItemsDom[0]);
+          carouselRef.current.classList.add('next');
+        } else {
+          sliderRef.current.prepend(sliderItemsDom[sliderItemsDom.length - 1]);
+          thumbnailBorderRef.current.prepend(thumbnailItemsDom[thumbnailItemsDom.length - 1]);
+          carouselRef.current.classList.add('prev');
+        }
+    
+        setTimeout(() => {
+          carouselRef.current.classList.remove('next');
+          carouselRef.current.classList.remove('prev');
+        }, timeRunning);
+      }
     };
 
     const handleNext = () => showSlider('next');
@@ -43,14 +47,16 @@ const Hero = () => {
     nextRef.current.addEventListener('click', handleNext);
     prevRef.current.addEventListener('click', handlePrev);
 
-    const thumbnailItemsDom = thumbnailBorderRef.current.querySelectorAll('.item');
-    thumbnailBorderRef.current.appendChild(thumbnailItemsDom[0]);
+    const thumbnailItemsDom = thumbnailBorderRef.current?.querySelectorAll('.item');
+    if (thumbnailItemsDom?.length) {
+        thumbnailBorderRef.current.appendChild(thumbnailItemsDom[0]);
+    }
 
     let runNextAuto = setInterval(handleNext, timeAutoNext);
 
     return () => {
-      nextRef.current.removeEventListener('click', handleNext);
-      prevRef.current.removeEventListener('click', handlePrev);
+      nextRef.current?.removeEventListener('click', handleNext);
+      prevRef.current?.removeEventListener('click', handlePrev);
       clearInterval(runNextAuto);
     };
   }, []);

@@ -7,7 +7,7 @@ const Hero = () => {
     const slider2Images = importAll(require.context('../assets/images', false, /slider2_\d+\.jpg$/));
     // const heroImages = importAll(require.context('../assets/hero', false, /hero_\d+\.jpg$/));
   return (
-    <>
+    <div className='py-10'>
         {/* <div className='hero-container'>
             <div className='hero-image'>
             {heroImages.map((src, index) => (
@@ -36,7 +36,7 @@ const Hero = () => {
             ))}
             </div>
         </div>
-    </>
+    </div>
   )
 }
 
