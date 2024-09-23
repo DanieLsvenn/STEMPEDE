@@ -4,6 +4,8 @@ import LabSpecial from '../components/LabSpecial'
 import SponsorShow from '../components/SponsorShow'
 import BestSeller from '../components/BestSeller'
 import HowItWorks from '../components/HowItWorks'
+import Introduction from '../components/Introduction'
+import Reviews from '../components/Reviews'
 
 const Home = () => {
   return (
@@ -12,6 +14,8 @@ const Home = () => {
         <LabSpecial />
         <HowItWorks />
         <BestSeller />
+        <Introduction />
+        <Reviews />
         <SponsorShow />
     </div>
   )

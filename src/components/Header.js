@@ -12,7 +12,7 @@ const Header = () => {
     const [isSearchFocused, setIsSearchFocused] = useState(false);
     const [searchValue, setSearchValue] = useState('');
   return (
-        <div className=' bg-slate-800 text-white py-3'>
+        <div className=' bg-slate-800 text-white py-3 fixed w-full z-20'>
 
         <div className='container mx-auto flex items-center px-4 justify-between'>
             <div className=''>
@@ -59,6 +59,8 @@ const Header = () => {
                 <Link to="/login" className='bg-blue-500 hover:bg-blue-700 text-white px-3 py-1 rounded-full'>Login</Link>
             </div>
         </div>
+
+        
         <div className='container mx-auto flex items-center px-4 justify-between'>
                     {/* <MdOutlineArrowDropDownCircle className='w-8 h-8' /> */}
             <ul className='flex flex-grow justify-between items-center py-4'>
