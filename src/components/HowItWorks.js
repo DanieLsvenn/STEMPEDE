@@ -6,8 +6,9 @@ import step3 from '../assets/steps/step_3.jpg'
 const HowItWorks = () => {
   return (
     <div>
-        <div className='font-bold text-4xl text-center py-12'>
+        <div className='font-bold flex flex-col text-4xl text-center items-center py-12 gap-2.5'>
             How Lab Special Works
+            <hr className='w-52 h-2 rounded-xl bg-black' />
         </div>
         <div className='flex justify-between items-center'>
             <div className='flex flex-col items-center justify-center h-full'>

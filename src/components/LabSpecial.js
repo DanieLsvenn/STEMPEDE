@@ -4,8 +4,9 @@ import labSpecial from '../assets/lab_special.jpg'
 const LabSpecial = () => {
   return (
     <div className=''>
-      <div className='text-center'>
-        <h1 className='text-4xl font-bold mb-14'>Lab Special</h1>
+      <div className='flex flex-col items-center gap-2.5 text-center'>
+        <h1 className='text-4xl font-bold'>Lab Special</h1>
+        <hr className='w-52 h-2 rounded-xl bg-black mb-14' />
       </div>
 
       <div className="flex justify-between items-center">

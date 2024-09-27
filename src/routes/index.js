@@ -4,6 +4,9 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import ForgotPassword from "../pages/ForgotPassword";
 import SignUp from "../pages/SignUp";
+import ShopCategory from "../pages/ShopCategory";
+import Product from "../pages/Product";
+import Cart from "../pages/Cart";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +29,29 @@ const router = createBrowserRouter([
                 path: "sign-up",
                 element: <SignUp />,
             },
+            {
+                path: "shop-category/:category",
+                element: <ShopCategory />,
+            },
+            // {
+            //     path: "product",
+            //     element: <Product />,
+            //     children: [
+            //         {
+            //             path: ":productId",
+            //             element: <Product />,
+            //         },
+            //     ]
+            // },
+            {
+                path: "product/:productId",
+                element: <Product />,
+            },
+            {
+                path: "cart",
+                element: <Cart />,
+            },
+
         ]
     }
 ])
