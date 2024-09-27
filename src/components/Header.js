@@ -6,6 +6,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  const [menu, setMenu] = useState("home");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isProduct1DropdownOpen, setIsProduct1DropdownOpen] = useState(false);
   const [isProduct2DropdownOpen, setIsProduct2DropdownOpen] = useState(false);
@@ -47,9 +48,9 @@ const Header = () => {
 
         <div className="flex items-center gap-5">
           <div className="text-2xl relative cursor-pointer text-white hover:text-blue-500 transition-all duration-300 ease-in-out">
-            <span>
+            <Link to="/cart">
               <FaShoppingCart />
-            </span>
+            </Link>
             <div>
               <p className="text-xs bg-yellow-500 text-white w-5 p-1 flex items-center justify-center rounded-full px-2 py-0.5 absolute -top-2 -right-3">
                 0
@@ -119,11 +120,29 @@ const Header = () => {
                       onMouseEnter={() => setIsProduct1DropdownOpen(true)}
                       onMouseLeave={() => setIsProduct1DropdownOpen(false)}
                     >
-                      <li className="px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg">
-                        <Link to="/">Detail 1</Link>
+                      <li
+                        onClick={() => {
+                          setMenu("3_7");
+                        }}
+                        className="px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg"
+                      >
+                        Age 3-7
                       </li>
-                      <li className="px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg">
-                        <Link to="/">Detail 2</Link>
+                      <li
+                        onClick={() => {
+                          setMenu("8_12");
+                        }}
+                        className="px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg"
+                      >
+                        Age 8-12
+                      </li>
+                      <li
+                        onClick={() => {
+                          setMenu("13_17");
+                        }}
+                        className="px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg"
+                      >
+                        Age 13-17
                       </li>
                     </ul>
                   )}
@@ -140,13 +159,30 @@ const Header = () => {
                     By Brand
                   </div>
                   {isProduct2DropdownOpen && (
-                    <ul className="absolute left-full top-0 bg-slate-500 text-white shadow-lg rounded-lg w-full mt-0 z-10">
-                      <li className="px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg">
-                        <Link to="/">Detail 1</Link>
-                      </li>
-                      <li className="px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg">
-                        <Link to="/">Detail 2</Link>
-                      </li>
+                    <ul
+                      className="absolute left-full top-0 bg-slate-500 text-white shadow-lg rounded-lg w-full mt-0 z-10"
+                      onMouseEnter={() => setIsProduct2DropdownOpen(true)}
+                      onMouseLeave={() => setIsProduct2DropdownOpen(false)}
+                    >
+                      {["poraxy", "deuxper", "vex", "lego", "stemtoy"].map(
+                        (brand) => (
+                          <li
+                            key={brand}
+                            onClick={() => {
+                              setMenu(brand);
+                              setIsProduct2DropdownOpen(false);
+                            }}
+                            className="px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg"
+                          >
+                            <Link
+                              style={{ textDecoration: "none" }}
+                              to={`/shop-category/${brand}`}
+                            >
+                              {brand.charAt(0).toUpperCase() + brand.slice(1)}
+                            </Link>
+                          </li>
+                        )
+                      )}
                     </ul>
                   )}
                 </li>
