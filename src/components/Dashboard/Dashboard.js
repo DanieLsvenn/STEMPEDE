@@ -7,7 +7,6 @@ import Card from "./Card";
 import { FaUsers, FaShoppingCart, FaDollarSign } from "react-icons/fa";
 import { LineChart, BarChart } from "./Charts";
 import Products from "./Products";
-import ToggleDarkMode from "./ToggleDarkMode";
 
 const Dashboard = () => {
   const [selectedSection, setSelectedSection] = useState("dashboard");

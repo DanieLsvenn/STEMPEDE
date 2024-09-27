@@ -1,5 +1,10 @@
 // src/components/Sidebar.js
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { faUser } from "@fortawesome/free-solid-svg-icons/faUser";
+import { faReceipt } from "@fortawesome/free-solid-svg-icons/faReceipt";
+import { faBoxArchive } from "@fortawesome/free-solid-svg-icons/faBoxArchive";
+import { faChalkboard } from "@fortawesome/free-solid-svg-icons/faChalkboard";
 
 const Sidebar = ({ onSelect, selectedSection }) => {
   return (
@@ -12,7 +17,7 @@ const Sidebar = ({ onSelect, selectedSection }) => {
           }`}
           onClick={() => onSelect("dashboard")}
         >
-          General
+          <FontAwesomeIcon className="mr-10" icon={faChalkboard} /> General
         </li>
         <li
           className={`p-4 hover:bg-gray-700 cursor-pointer ${
@@ -20,7 +25,7 @@ const Sidebar = ({ onSelect, selectedSection }) => {
           }`}
           onClick={() => onSelect("userManagement")}
         >
-          Manage Users
+          <FontAwesomeIcon className="mr-10" icon={faUser} /> Manage Users
         </li>
         <li
           className={`p-4 hover:bg-gray-700 cursor-pointer ${
@@ -28,6 +33,7 @@ const Sidebar = ({ onSelect, selectedSection }) => {
           }`}
           onClick={() => onSelect("orderManagement")}
         >
+          <FontAwesomeIcon className="mr-12" icon={faReceipt} />
           Manage Orders
         </li>
         <li
@@ -36,7 +42,8 @@ const Sidebar = ({ onSelect, selectedSection }) => {
           }`}
           onClick={() => onSelect("productManagement")}
         >
-          Manage Products
+          <FontAwesomeIcon className="mr-10" icon={faBoxArchive} /> Manage
+          Products
         </li>
       </ul>
     </div>

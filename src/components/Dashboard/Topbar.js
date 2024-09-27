@@ -1,20 +1,9 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faSun,
-  faMoon,
-  faBell,
-  faSearch,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBell, faSearch } from "@fortawesome/free-solid-svg-icons";
 import ToggleDarkMode from "./ToggleDarkMode";
 const Topbar = () => {
-  const [darkMode, setDarkMode] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.body.classList.toggle("dark");
-  };
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
