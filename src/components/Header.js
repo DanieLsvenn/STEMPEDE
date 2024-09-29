@@ -95,7 +95,7 @@ const Header = () => {
               onMouseLeave={() => setIsDropdownOpen(false)}
               className="cursor-pointer hover:bg-slate-700 px-4 py-2 flex items-center justify-center transition-colors duration-300 rounded-lg mx-1 font-bold"
             >
-              Products
+              <Link to={"/product"}>Products</Link>
             </div>
             {isDropdownOpen && (
               <ul
@@ -205,7 +205,7 @@ const Header = () => {
           </li>
           <li className="flex-1">
             <Link
-              to="/home"
+              to="/documentation"
               className="hover:bg-slate-700 px-4 py-2 flex items-center justify-center transition-colors duration-300 rounded-lg mx-1 font-bold"
             >
               Documentation

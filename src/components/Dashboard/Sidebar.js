@@ -12,24 +12,30 @@ const Sidebar = ({ onSelect, selectedSection }) => {
       <h1 className="text-2xl font-bold p-4">Admin Dashboard</h1>
       <ul>
         <li
-          className={`p-4 hover:bg-gray-700 cursor-pointer ${
-            selectedSection === "dashboard" ? "bg-gray-700" : ""
+          className={`p-4 cursor-pointer ${
+            selectedSection === "dashboard"
+              ? "bg-blue-500"
+              : "hover:bg-gray-700"
           }`}
           onClick={() => onSelect("dashboard")}
         >
           <FontAwesomeIcon className="mr-10" icon={faChalkboard} /> General
         </li>
         <li
-          className={`p-4 hover:bg-gray-700 cursor-pointer ${
-            selectedSection === "userManagement" ? "bg-gray-700" : ""
+          className={`p-4 cursor-pointer ${
+            selectedSection === "userManagement"
+              ? "bg-blue-500"
+              : "hover:bg-gray-700"
           }`}
           onClick={() => onSelect("userManagement")}
         >
           <FontAwesomeIcon className="mr-10" icon={faUser} /> Manage Users
         </li>
         <li
-          className={`p-4 hover:bg-gray-700 cursor-pointer ${
-            selectedSection === "orderManagement" ? "bg-gray-700" : ""
+          className={`p-4 cursor-pointer ${
+            selectedSection === "orderManagement"
+              ? "bg-blue-500"
+              : "hover:bg-gray-700"
           }`}
           onClick={() => onSelect("orderManagement")}
         >
@@ -37,8 +43,10 @@ const Sidebar = ({ onSelect, selectedSection }) => {
           Manage Orders
         </li>
         <li
-          className={`p-4 hover:bg-gray-700 cursor-pointer ${
-            selectedSection === "productManagement" ? "bg-gray-700" : ""
+          className={`p-4 cursor-pointer ${
+            selectedSection === "productManagement"
+              ? "bg-blue-500"
+              : "hover:bg-gray-700"
           }`}
           onClick={() => onSelect("productManagement")}
         >

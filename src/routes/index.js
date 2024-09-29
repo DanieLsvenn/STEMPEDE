@@ -5,9 +5,12 @@ import Login from "../pages/Login";
 import ForgotPassword from "../pages/ForgotPassword";
 import SignUp from "../pages/SignUp";
 import ShopCategory from "../pages/ShopCategory";
-import Product from "../pages/Product";
 import Cart from "../pages/Cart";
 import DashboardPage from "../pages/DashboardPage";
+import ProductDetail from "../pages/ProductDetail";
+import Product from "../pages/Product";
+import ProductPage from "../pages/ProductPage";
+import Documentation from "../pages/Documentation";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -35,10 +38,14 @@ const router = createBrowserRouter([
       },
       {
         path: "product",
-        element: <Product />,
+        element: <ProductPage />,
         children: [
           {
             path: ":productId",
+            element: <ProductDetail />,
+          },
+          {
+            path: "",
             element: <Product />,
           },
         ],
@@ -46,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "documentation",
+        element: <Documentation />,
       },
     ],
   },
