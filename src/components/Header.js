@@ -119,7 +119,10 @@ const Header = () => {
                                     By Brand
                                 </div>
                                 {isProduct2DropdownOpen && (
-                                    <ul className='absolute left-full top-0 bg-slate-500 text-white shadow-lg rounded-lg w-full mt-0 z-10'>
+                                    <ul className='absolute left-full top-0 bg-slate-500 text-white shadow-lg rounded-lg w-full mt-0 z-10'
+                                        onMouseEnter={() => setIsProduct2DropdownOpen(true)}
+                                        onMouseLeave={() => setIsProduct2DropdownOpen(false)}
+                                        >
                                         {['poraxy', 'deuxper', 'vex', 'lego', 'stemtoy'].map((brand) => (
                                             <li key={brand} className='px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg'>
                                                 <Link 
