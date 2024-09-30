@@ -91,8 +91,20 @@ const Header = () => {
                                         onMouseEnter={() => setIsProduct1DropdownOpen(true)}
                                         onMouseLeave={() => setIsProduct1DropdownOpen(false)}
                                     >
-                                        <li className='px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg'><Link to="/">Detail 1</Link></li>
-                                        <li className='px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg'><Link to="/">Detail 2</Link></li>
+                                        {['3-7', '8-12', '13-17'].map((age) => (
+                                            <li key={age} className='px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg'>
+                                                <Link 
+                                                    to={`/shop-category/${age}`} 
+                                                    onClick={() => {
+                                                        console.log(`Navigating to: ${age}`);
+                                                        setIsProduct1DropdownOpen(false);
+                                                    }}
+                                                    style={{ textDecoration: 'none' }}
+                                                >
+                                                    {age.charAt(0).toUpperCase() + age.slice(1)}
+                                                </Link>
+                                            </li>
+                                        ))}
                                     </ul>
                                 )}
                             </li>
@@ -108,8 +120,20 @@ const Header = () => {
                                 </div>
                                 {isProduct2DropdownOpen && (
                                     <ul className='absolute left-full top-0 bg-slate-500 text-white shadow-lg rounded-lg w-full mt-0 z-10'>
-                                        <li className='px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg'><Link to="/">Detail 1</Link></li>
-                                        <li className='px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg'><Link to="/">Detail 2</Link></li>
+                                        {['poraxy', 'deuxper', 'vex', 'lego', 'stemtoy'].map((brand) => (
+                                            <li key={brand} className='px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg'>
+                                                <Link 
+                                                    to={`/shop-category/${brand}`} 
+                                                    onClick={() => {
+                                                        console.log(`Navigating to: ${brand}`);
+                                                        setIsProduct2DropdownOpen(false);
+                                                    }}
+                                                    style={{ textDecoration: 'none' }}
+                                                >
+                                                    {brand.charAt(0).toUpperCase() + brand.slice(1)}
+                                                </Link>
+                                            </li>
+                                        ))}
                                     </ul>
                                 )}
                             </li>
