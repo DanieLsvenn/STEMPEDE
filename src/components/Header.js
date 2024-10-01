@@ -81,19 +81,30 @@ const Header = () => {
                             <div className='px-4 py-2'>Filter</div>
                             <li className='relative'>
                                 <div 
-                                onMouseEnter={() => setIsProduct1DropdownOpen(!isProduct1DropdownOpen)} 
-                                onMouseLeave={() => setIsProduct1DropdownOpen(false)}
-                                className='hover:bg-slate-200 hover:text-black px-4 py-2 flex items-center justify-between'>
+                                    onMouseEnter={() => setIsProduct1DropdownOpen(!isProduct1DropdownOpen)} 
+                                    onMouseLeave={() => setIsProduct1DropdownOpen(false)}
+                                    className='hover:bg-slate-200 hover:text-black px-4 py-2 flex items-center justify-between'>
                                     By Age
                                 </div>
                                 {isProduct1DropdownOpen && (
                                     <ul className='absolute left-full top-0 bg-slate-500 text-white shadow-lg rounded-lg w-full mt-0 z-10'
-                                    onMouseEnter={() => setIsProduct1DropdownOpen(true)}
-                                    onMouseLeave={() => setIsProduct1DropdownOpen(false)}
+                                        onMouseEnter={() => setIsProduct1DropdownOpen(true)}
+                                        onMouseLeave={() => setIsProduct1DropdownOpen(false)}
                                     >
-                                        <li onClick={()=>{setMenu("3_7")}} className='px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg'>Age 3-7</li>
-                                        <li onClick={()=>{setMenu("8_12")}} className='px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg'>Age 8-12</li>
-                                        <li onClick={()=>{setMenu("13_17")}} className='px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg'>Age 13-17</li>
+                                        {['3-7', '8-12', '13-17'].map((age) => (
+                                            <li key={age} className='px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg'>
+                                                <Link 
+                                                    to={`/shop-category/${age}`} 
+                                                    onClick={() => {
+                                                        console.log(`Navigating to: ${age}`);
+                                                        setIsProduct1DropdownOpen(false);
+                                                    }}
+                                                    style={{ textDecoration: 'none' }}
+                                                >
+                                                    {age.charAt(0).toUpperCase() + age.slice(1)}
+                                                </Link>
+                                            </li>
+                                        ))}
                                     </ul>
                                 )}
                             </li>
@@ -102,19 +113,28 @@ const Header = () => {
 
                             <li className='relative'>
                                 <div 
-                                onMouseEnter={() => setIsProduct2DropdownOpen(!isProduct2DropdownOpen)} 
-                                onMouseLeave={() => setIsProduct2DropdownOpen(false)}
-                                className='hover:bg-slate-200 hover:text-black px-4 py-2 flex items-center justify-between'>
+                                    onMouseEnter={() => setIsProduct2DropdownOpen(!isProduct2DropdownOpen)} 
+                                    onMouseLeave={() => setIsProduct2DropdownOpen(false)}
+                                    className='hover:bg-slate-200 hover:text-black px-4 py-2 flex items-center justify-between'>
                                     By Brand
                                 </div>
                                 {isProduct2DropdownOpen && (
                                     <ul className='absolute left-full top-0 bg-slate-500 text-white shadow-lg rounded-lg w-full mt-0 z-10'
-                                    onMouseEnter={() => setIsProduct2DropdownOpen(true)}
-                                    onMouseLeave={() => setIsProduct2DropdownOpen(false)}
-                                    >
+                                        onMouseEnter={() => setIsProduct2DropdownOpen(true)}
+                                        onMouseLeave={() => setIsProduct2DropdownOpen(false)}
+                                        >
                                         {['poraxy', 'deuxper', 'vex', 'lego', 'stemtoy'].map((brand) => (
-                                            <li key={brand} onClick={() => { setMenu(brand); setIsProduct2DropdownOpen(false); }} className='px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg'>
-                                                <Link style={{ textDecoration: 'none' }} to={`/shop-category/${brand}`}>{brand.charAt(0).toUpperCase() + brand.slice(1)}</Link>
+                                            <li key={brand} className='px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg'>
+                                                <Link 
+                                                    to={`/shop-category/${brand}`} 
+                                                    onClick={() => {
+                                                        console.log(`Navigating to: ${brand}`);
+                                                        setIsProduct2DropdownOpen(false);
+                                                    }}
+                                                    style={{ textDecoration: 'none' }}
+                                                >
+                                                    {brand.charAt(0).toUpperCase() + brand.slice(1)}
+                                                </Link>
                                             </li>
                                         ))}
                                     </ul>
