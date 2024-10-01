@@ -26,7 +26,7 @@ const Login = () => {
       <div className="w-3/5 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-5xl font-bold text-orange-500">
-            Log In <span className="text-gray-800">and start Exporing!</span>
+            Log In <span className="text-gray-800">and start Exploring!</span>
           </h1>
         </div>
       </div>
