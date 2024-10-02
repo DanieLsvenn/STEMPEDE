@@ -23,22 +23,22 @@ const Hero = () => {
 
       if (!sliderItemsDom || !thumbnailItemsDom || !carouselRef.current) return;
       
-      if (carouselRef.current) {
-        if (type === 'next') {
-          sliderRef.current.appendChild(sliderItemsDom[0]);
-          thumbnailBorderRef.current.appendChild(thumbnailItemsDom[0]);
-          carouselRef.current.classList.add('next');
-        } else {
-          sliderRef.current.prepend(sliderItemsDom[sliderItemsDom.length - 1]);
-          thumbnailBorderRef.current.prepend(thumbnailItemsDom[thumbnailItemsDom.length - 1]);
-          carouselRef.current.classList.add('prev');
-        }
+      // if (carouselRef.current) {
+      //   if (type === 'next') {
+      //     sliderRef.current.appendChild(sliderItemsDom[0]);
+      //     thumbnailBorderRef.current.appendChild(thumbnailItemsDom[0]);
+      //     carouselRef.current.classList.add('next');
+      //   } else {
+      //     sliderRef.current.prepend(sliderItemsDom[sliderItemsDom.length - 1]);
+      //     thumbnailBorderRef.current.prepend(thumbnailItemsDom[thumbnailItemsDom.length - 1]);
+      //     carouselRef.current.classList.add('prev');
+      //   }
     
-        setTimeout(() => {
-          carouselRef.current.classList.remove('next');
-          carouselRef.current.classList.remove('prev');
-        }, timeRunning);
-      }
+      //   setTimeout(() => {
+      //     carouselRef.current.classList.remove('next');
+      //     carouselRef.current.classList.remove('prev');
+      //   }, timeRunning);
+      // }
     };
 
     const handleNext = () => showSlider('next');

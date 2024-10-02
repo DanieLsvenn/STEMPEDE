@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import all_product from "./../assets/products/all_products"; // Your product array data
 import { useEffect } from "react";
+import { Context } from '../context/Context';
+
 const ProductDetail = () => {
   const { productId } = useParams(); // Get the product ID from the URL params
   const product = all_product.find((p) => p.id === parseInt(productId)); // Find the product by ID
+  const {addToCart} = useContext(Context); //Add to cart function
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -32,7 +35,7 @@ const ProductDetail = () => {
               <p className="text-2xl font-semibold text-gray-800 mb-6">
                 ${product.price}
               </p>
-              <button className="bg-blue-500 text-white px-5 py-2 rounded-md transition hover:bg-blue-600">
+              <button onClick={()=>{addToCart(product.id)}} className="bg-blue-500 text-white px-5 py-2 rounded-md transition hover:bg-blue-600">
                 Add to Cart
               </button>
               <Link to="/product">
