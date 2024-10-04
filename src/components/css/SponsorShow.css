@@ -35,6 +35,8 @@ main{
 }
 .slider .list .item img{
     width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 @keyframes autoRun{
     from{

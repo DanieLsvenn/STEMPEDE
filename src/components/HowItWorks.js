@@ -2,14 +2,16 @@ import React from 'react'
 import step1 from '../assets/steps/step_1.jpg'
 import step2 from '../assets/steps/step_2.jpg'
 import step3 from '../assets/steps/step_3.jpg'
+import grid_box from '../assets/blue_grid.png'
 
 const HowItWorks = () => {
   return (
-    <div>
-        <div className='font-bold text-4xl text-center py-12'>
+    <div className='flex flex-col items-center'>
+        <div className='font-bold text-4xl text-center mt-12'>
             How Lab Special Works
         </div>
-        <div className='flex justify-between items-center'>
+        <hr className='py-0.5 w-64 mb-4 mt-2 bg-black'/>
+        <div className='flex gap-8'>
             <div className='flex flex-col items-center justify-center h-full'>
                 <div className='text-lg bg-yellow-400 text-white w-10 h-10 p-1 flex items-center justify-center rounded-full'>1</div>
                 <div className='font-bold py-4'>Order</div>

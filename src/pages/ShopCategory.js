@@ -18,40 +18,23 @@ const ShopCategory = (props) => {
   return (
     <div>
         {category === 'poraxy' && (
-            <img src={poraxy_banner} alt="Poraxy Banner" className="w-full h-[700px]" />
+            <img src={poraxy_banner} alt="Poraxy Banner" className="w-full h-[600px] object-cover" />
         )}
         {category === 'deuxper' && (
-            <img src={deuxper_banner} alt="Deuxper Banner" className="w-full h-[700px]" />
+            <img src={deuxper_banner} alt="Deuxper Banner" className="w-full h-[600px] object-cover" />
         )}
         {category === 'vex' && (
-            <img src={vex_banner} alt="Vex Banner" className="w-full h-[700px]" />
+            <img src={vex_banner} alt="Vex Banner" className="w-full h-[600px] object-cover" />
         )}
         {category === 'lego' && (
-            <img src={lego_banner} alt="Lego Banner" className="w-full h-[700px]" />
+            <img src={lego_banner} alt="Lego Banner" className="w-full h-[600px] object-cover" />
         )}
         {category === 'stemtoy' && (
-            <img src={stemtoy_banner} alt="Stem Toy Banner" className="w-full h-[900px]" />
+            <img src={stemtoy_banner} alt="Stem Toy Banner" className="w-full h-[600px] object-cover" />
         )}
         {isAgeCategory && (
-        <img src={age_banner} alt={`${category} Banner`} className="w-full h-[900px]" />
+        <img src={age_banner} alt={`${category} Banner`} className="w-full h-[600px] object-cover" />
         )}
-        {/* <h1>{category.charAt(0).toUpperCase() + category.slice(1)} Products</h1>
-
-        <div>
-          <p>
-            <span>Showing 1-12</span> out of 40 products
-          </p>
-
-          <div className='flex'>
-            Sort by <RiArrowDropDownLine />
-          </div>
-        </div> */}
-
-        {/* <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5 mb-5 mx-[42.5rem]:'>
-          {all_product.filter(item => isAgeCategory ? item.age === category : item.brand.toLowerCase() === category).map((item, i) => {
-            return <Items key={i} id={item.id} name={item.name} image={item.image} price={item.price} />
-          })}
-        </div> */}
 
         <div className="min-h-screen bg-gray-100 py-10">
         <div className="container mx-auto px-4">

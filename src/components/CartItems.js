@@ -4,7 +4,7 @@ import { Context } from '../context/Context'
 import { RxCross2 } from "react-icons/rx";
 
 const CartItems = () => {
-    const {all_product, cartItems, removeFromCart} = useContext(Context)
+    const {all_product, cartItems, removeFromCart, getTotalCartAmount} = useContext(Context)
   return (
     <div className='cartitems'>
         <div className='cartitems-format-main'>
@@ -37,7 +37,7 @@ const CartItems = () => {
                 <div>
                     <div className='cartitems-total-item'>
                         <p>Subtotal</p>
-                        <p>${0}</p>
+                        <p>${getTotalCartAmount()}</p>
                     </div>
                     <hr />
                     <div className='cartitems-total-item'>
@@ -47,10 +47,10 @@ const CartItems = () => {
                     <hr />
                     <div className='cartitems-total-item'>
                         <h3>Total</h3>
-                        <h3>${0}</h3>
+                        <h3>${getTotalCartAmount()}</h3>
                     </div>
                 </div>
-                <button>PROCEED TO CHECKOUT</button>
+                <button className='rounded-lg bg-blue-500'>PROCEED TO CHECKOUT</button>
             </div>
         </div>
     </div>

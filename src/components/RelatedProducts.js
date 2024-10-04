@@ -1,13 +1,15 @@
 import React from 'react'
-import data_product from '../assets/products/data'
+import all_product from '../assets/products/data'
+import Items from './Items'
 import { Link } from 'react-router-dom'
 
-const BestSeller = () => {
+const RelatedProducts = () => {
   return (
-    <div className='py-12 flex flex-col items-center gap-5'>
-    <h1 className='text-black font-bold text-4xl'>Best Seller</h1>
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {data_product.map((item, i) => {
+    <div className='flex flex-col items-center'>
+        <h1 className='text-4xl font-semibold'>Related Products</h1>
+        <hr className='py-0.5 w-64 mb-4 mt-2 bg-black'/>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {all_product.map((item, i) => {
               return (
                 <div
                   key={item.id}
@@ -32,9 +34,9 @@ const BestSeller = () => {
                 </div>
               )
             })}
-          </div>
+        </div>
     </div>
   )
 }
 
-export default BestSeller
+export default RelatedProducts

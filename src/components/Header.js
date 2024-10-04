@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import Logo from "./Logo";
 import { FaSearch } from "react-icons/fa";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { Context } from "../context/Context";
+import { IoIosArrowDropdown } from "react-icons/io";
 
 const Header = () => {
   const [menu, setMenu] = useState("home");
@@ -12,16 +14,21 @@ const Header = () => {
   const [isProduct2DropdownOpen, setIsProduct2DropdownOpen] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const {getTotalCartItems}=useContext(Context);
+
   return (
     <div className=" bg-slate-800 text-white py-3 w-full z-20">
       <div className="container mx-auto flex items-center px-4 justify-between">
-        <div className="">
+        <div className="flex justify-left items-center gap-4 py-3">
           <Link to="/">
             <Logo w={90} h={50} />
           </Link>
+          <div className="text-4xl font-semibold">S T E M P E D E</div>
         </div>
 
-        <div className="hidden lg:flex items-center">
+        
+
+        {/* <div className="hidden lg:flex items-center">
           <div className="relative group">
             <input
               type="text"
@@ -44,7 +51,9 @@ const Header = () => {
           <div className="bg-blue-500 hover:bg-blue-700 text-white rounded-r-full px-2 py-2 h-8 cursor-pointer">
             <FaSearch />
           </div>
-        </div>
+        </div> */}
+
+        
 
         <div className="flex items-center gap-5">
           <div className="text-2xl relative cursor-pointer text-white hover:text-blue-500 transition-all duration-300 ease-in-out">
@@ -53,7 +62,7 @@ const Header = () => {
             </Link>
             <div>
               <p className="text-xs bg-yellow-500 text-white w-5 p-1 flex items-center justify-center rounded-full px-2 py-0.5 absolute -top-2 -right-3">
-                0
+                {getTotalCartItems()}
               </p>
             </div>
           </div>
@@ -76,7 +85,7 @@ const Header = () => {
           </Link>
         </div>
       </div>
-
+      
       <div className="container mx-auto flex items-center px-4 justify-between">
         {/* <MdOutlineArrowDropDownCircle className='w-8 h-8' /> */}
         <ul className="flex flex-grow justify-between items-center py-4">

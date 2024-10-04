@@ -14,18 +14,24 @@ const Documentation = () => {
 
   const content = {
     Introduction:
-      "Welcome to the documentation! This section covers basic information.",
+    //Introduction
+    "Welcome to the documentation! This section covers basic information.",
+    //Getting started
     "Getting Started":
-      "This section will help you set up the project from scratch.",
+    "This section will help you set up the project from scratch.",
+    //SDK setup
     "SDK Setup": "Learn how to set up the SDK step-by-step.",
-    "API Reference": "Here’s a complete API reference with all the details.",
+    //API references
+    "API Reference": "Here's a complete API reference with all the details.",
+    //Advanced topics
     "Advanced Topics":
-      "This section covers advanced use cases and optimizations.",
+    "This section covers advanced use cases and optimizations.",
+    //FAQs
     FAQs: "Frequently Asked Questions and troubleshooting tips.",
   };
 
   return (
-    <div className="min-h-screen w-full flex bg-gray-100 pt-36">
+    <div className="min-h-screen w-full flex bg-gray-100">
       {/* Sidebar */}
       <nav className="w-64 bg-gray-800 text-white p-5 space-y-4">
         <h2 className="text-2xl font-bold mb-4">Documentation</h2>

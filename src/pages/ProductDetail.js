@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import all_product from "./../assets/products/all_products"; // Your product array data
 import { useEffect } from "react";
 import { Context } from '../context/Context';
+import DescriptionBox from "../components/DescriptionBox";
+import RelatedProduct from "../components/RelatedProducts"
 
 const ProductDetail = () => {
   const { productId } = useParams(); // Get the product ID from the URL params
@@ -16,7 +18,7 @@ const ProductDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 pt-72">
+    <div className="min-h-screen bg-gray-100 py-10 pt-10">
       <div className="container mx-auto px-4">
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
           <div className="flex flex-col lg:flex-row gap-8">
@@ -47,6 +49,9 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
+
+      <DescriptionBox />
+      <RelatedProduct />
     </div>
   );
 };
