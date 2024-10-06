@@ -22,21 +22,21 @@ const Login = () => {
   };
 
   return (
-    <section id="login" className="bg-gray-100 min-h-screen flex items-center">
-      <div className="w-3/5 flex items-center justify-center">
+    <section id="login" className="bg-gray-100 min-h-screen flex items-center flex-col">
+      <div className="w-1/2 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-5xl font-bold text-orange-500">
+          <h1 className="text-5xl font-bold text-yellow-500 m-6">
             Log In <span className="text-gray-800">and start Exploring!</span>
           </h1>
         </div>
       </div>
-      <div className="bg-white shadow-lg rounded-lg w-full max-w-md mx-auto p-6">
-        <div className="w-20 h-20 mx-auto mb-4">
+      <div className="bg-white shadow-lg rounded-lg w-full max-w-3xl mx-auto p-6">
+        <div className="w-20 h-20 mx-auto mb-6">
           <img src={loginIcon} alt="login icon" className="object-cover" />
         </div>
 
-        <h2 className="text-center text-2xl font-bold mb-6">Login</h2>
-
+        <h2 className="text-center text-2xl font-bold mb-4">Login</h2>
+        
         <form className="flex flex-col gap-4">
           <div className="grid">
             <label className="font-medium mb-1">Email:</label>

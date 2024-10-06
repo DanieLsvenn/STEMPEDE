@@ -3,9 +3,10 @@ import labSpecial from '../assets/lab_special.jpg'
 
 const LabSpecial = () => {
   return (
-    <div className=''>
+    <div className='items-center flex flex-col'>
       <div className='text-center'>
-        <h1 className='text-4xl font-bold mb-14'>Lab Special</h1>
+        <h1 className='text-4xl font-bold'>Lab Special</h1>
+        <hr className='py-0.5 w-64 mb-4 mt-2 bg-black'/>
       </div>
 
       <div className="flex justify-between items-center">

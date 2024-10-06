@@ -37,7 +37,7 @@ const ProductDetail = () => {
               <p className="text-2xl font-semibold text-gray-800 mb-6">
                 ${product.price}
               </p>
-              <button onClick={()=>{addToCart(product.id)}} className="bg-blue-500 text-white px-5 py-2 rounded-md transition hover:bg-blue-600">
+              <button onClick={()=>{addToCart(product.id)}} className="bg-blue-500 text-white px-5 py-2 rounded-md transition-all hover:bg-blue-700">
                 Add to Cart
               </button>
               <Link to="/product">

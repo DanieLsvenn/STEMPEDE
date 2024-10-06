@@ -32,7 +32,7 @@ const Footer = () => {
             type='email' 
             placeholder='Enter email credentials'/>
         </div>
-        <button className='bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-r-full hover:scale-105 transition-all ml-2'>Sign Up</button>
+        <button className='bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-r-full hover:scale-105 transition-all ml-2 whitespace-nowrap'>Sign Up</button>
     </div>
 </div>
         </div>

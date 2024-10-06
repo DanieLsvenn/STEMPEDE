@@ -47,6 +47,7 @@ let all_product = [
     age: "8-12",
     image: p1_img,
     price: 50.0,
+    description: "Item 1"
   },
   {
       id: 2,
@@ -55,6 +56,7 @@ let all_product = [
       age: "8-12",
       image: p2_img,
       price: 50.0,
+      description: "Item 2"
   },
   {
       id: 3,
@@ -63,6 +65,7 @@ let all_product = [
       age: "8-12",
       image: p3_img,
       price: 50.0,
+      description: "Item 3"
   },
   {
       id: 4,
@@ -71,6 +74,7 @@ let all_product = [
       age: "8-12",
       image: p4_img,
       price: 50.0,
+      description: "Item 4"
   },
   {
       id: 9,
@@ -79,6 +83,7 @@ let all_product = [
       age: "8-12",
       image: p9_img,
       price: 50.0,
+      description: "Item 5"
   },
   {
       id: 10,
@@ -87,6 +92,7 @@ let all_product = [
       age: "8-12",
       image: p10_img,
       price: 50.0,
+      description: "Item 6"
   },
   {
       id: 11,
@@ -95,6 +101,7 @@ let all_product = [
       age: "8-12",
       image: p11_img,
       price: 50.0,
+      description: "Item 7"
   },
   {
       id: 5,
@@ -103,6 +110,7 @@ let all_product = [
       age: "8-12",
       image: p5_img,
       price: 50.0,
+      description: "Item 8"
   },
   {
       id: 6,
@@ -111,6 +119,7 @@ let all_product = [
       age: "8-12",
       image: p6_img,
       price: 50.0,
+      description: "Item 9"
   },
   {
       id: 7,
@@ -119,6 +128,7 @@ let all_product = [
       age: "8-12",
       image: p7_img,
       price: 50.0,
+      description: "Item 10"
   },
   {
       id: 8,
@@ -127,6 +137,7 @@ let all_product = [
       age: "13-17",
       image: p8_img,
       price: 50.0,
+      description: "Item 11"
   },
   {
       id: 34,
@@ -135,6 +146,7 @@ let all_product = [
       age: "13-17",
       image: p34_img,
       price: 50.0,
+      description: "Item 12"
   },
   {
       id: 35,
@@ -143,6 +155,7 @@ let all_product = [
       age: "13-17",
       image: p35_img,
       price: 50.0,
+      description: "Item 13"
   },
   {
       id: 36,
@@ -151,6 +164,7 @@ let all_product = [
       age: "13-17",
       image: p36_img,
       price: 50.0,
+      description: "Item 14"
   },
   {
       id: 12,
@@ -159,6 +173,7 @@ let all_product = [
       age: "3-7",
       image: p12_img,
       price: 50.0,
+      description: "Item 15"
   },
   {
       id: 13,
@@ -167,6 +182,7 @@ let all_product = [
       age: "3-7",
       image: p13_img,
       price: 50.0,
+      description: "Item 16"
   },
   {
       id: 14,
@@ -175,6 +191,7 @@ let all_product = [
       age: "3-7",
       image: p14_img,
       price: 50.0,
+      description: "Item 17"
   },
   {
       id: 15,
@@ -183,6 +200,7 @@ let all_product = [
       age: "3-7",
       image: p15_img,
       price: 50.0,
+      description: "Item 18"
   },
   {
       id: 16,
@@ -191,6 +209,7 @@ let all_product = [
       age: "8-12",
       image: p16_img,
       price: 50.0,
+      description: "Item 19"
   },
   {
       id: 17,
@@ -199,6 +218,7 @@ let all_product = [
       age: "13-17",
       image: p17_img,
       price: 50.0,
+      description: "Item 20"
   },
   {
       id: 18,
@@ -207,6 +227,7 @@ let all_product = [
       age: "8-12",
       image: p18_img,
       price: 50.0,
+      description: "Item 21"
   },
   {
       id: 19,
@@ -215,6 +236,7 @@ let all_product = [
       age: "8-12",
       image: p19_img,
       price: 50.0,
+      description: "Item 22"
   },
   {
       id: 20,
@@ -223,6 +245,7 @@ let all_product = [
       age: "13-17",
       image: p20_img,
       price: 50.0,
+      description: "Item 23"
   },
   {
       id: 21,
@@ -231,6 +254,7 @@ let all_product = [
       age: "13-17",
       image: p21_img,
       price: 50.0,
+      description: "Item 24"
   },
   {
       id: 22,
@@ -239,6 +263,7 @@ let all_product = [
       age: "8-12",
       image: p22_img,
       price: 50.0,
+      description: "Item 25"
   },
   {
       id: 23,
@@ -247,6 +272,7 @@ let all_product = [
       age: "13-17",
       image: p23_img,
       price: 50.0,
+      description: "Item 26"
   },
   {
       id: 24,
@@ -255,6 +281,7 @@ let all_product = [
       age: "8-12",
       image: p24_img,
       price: 50.0,
+      description: "Item 27"
   },
   {
       id: 25,
@@ -263,6 +290,7 @@ let all_product = [
       age: "13-17",
       image: p25_img,
       price: 50.0,
+      description: "Item 28"
   },
   {
       id: 26,
@@ -271,6 +299,7 @@ let all_product = [
       age: "13-17",
       image: p26_img,
       price: 50.0,
+      description: "Item 29"
   },
   {
       id: 27,
@@ -279,6 +308,7 @@ let all_product = [
       age: "13-17",
       image: p27_img,
       price: 50.0,
+      description: "Item 30"
   },
   {
       id: 28,
@@ -287,6 +317,7 @@ let all_product = [
       age: "13-17",
       image: p28_img,
       price: 50.0,
+      description: "Item 31"
   },
   {
       id: 29,
@@ -295,6 +326,7 @@ let all_product = [
       age: "13-17",
       image: p29_img,
       price: 50.0,
+      description: "Item 32"
   },
   {
       id: 30,
@@ -303,6 +335,7 @@ let all_product = [
       age: "3-7",
       image: p30_img,
       price: 50.0,
+      description: "Item 33"
   },
   {
       id: 31,
@@ -311,6 +344,7 @@ let all_product = [
       age: "8-12",
       image: p31_img,
       price: 50.0,
+      description: "Item 34"
   },
   {
       id: 32,
@@ -319,6 +353,7 @@ let all_product = [
       age: "3-7",
       image: p32_img,
       price: 50.0,
+      description: "Item 35"
   },
   {
       id: 33,
@@ -327,6 +362,7 @@ let all_product = [
       age: "3-7",
       image: p33_img,
       price: 50.0,
+      description: "Item 36"
   },
   {
       id: 37,
@@ -335,6 +371,7 @@ let all_product = [
       age: "3-7",
       image: p37_img,
       price: 50.0,
+      description: "Item 37"
   },
   {
       id: 38,
@@ -343,6 +380,7 @@ let all_product = [
       age: "3-7",
       image: p38_img,
       price: 50.0,
+      description: "Item 38"
   },
   {
       id: 39,
@@ -351,6 +389,7 @@ let all_product = [
       age: "8-12",
       image: p39_img,
       price: 50.0,
+      description: "Item 39"
   },
   {
       id: 40,
@@ -359,6 +398,7 @@ let all_product = [
       age: "3-7",
       image: p40_img,
       price: 50.0,
+      description: "Item 40"
   },
 ];
 

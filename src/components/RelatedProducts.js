@@ -8,7 +8,7 @@ const RelatedProducts = () => {
     <div className='flex flex-col items-center'>
         <h1 className='text-4xl font-semibold'>Related Products</h1>
         <hr className='py-0.5 w-64 mb-4 mt-2 bg-black'/>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div onClick={window.scrollTo(0,0)} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {all_product.map((item, i) => {
               return (
                 <div

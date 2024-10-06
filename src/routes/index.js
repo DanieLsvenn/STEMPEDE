@@ -11,6 +11,7 @@ import ProductDetail from "../pages/ProductDetail";
 import Product from "../pages/Product";
 import ProductPage from "../pages/ProductPage";
 import Documentation from "../pages/Documentation";
+import Profile from "../pages/Profile"
 const router = createBrowserRouter([
   {
     path: "/",
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: "documentation",
         element: <Documentation />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />
       },
     ],
   },

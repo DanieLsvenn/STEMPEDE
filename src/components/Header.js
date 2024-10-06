@@ -1,11 +1,9 @@
 import React, { useContext, useRef, useState } from "react";
 import Logo from "./Logo";
-import { FaSearch } from "react-icons/fa";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Context } from "../context/Context";
-import { IoIosArrowDropdown } from "react-icons/io";
 
 const Header = () => {
   const [menu, setMenu] = useState("home");
@@ -15,7 +13,7 @@ const Header = () => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const {getTotalCartItems}=useContext(Context);
-
+  
   return (
     <div className=" bg-slate-800 text-white py-3 w-full z-20">
       <div className="container mx-auto flex items-center px-4 justify-between">
@@ -68,7 +66,9 @@ const Header = () => {
           </div>
 
           <div className="text-3xl cursor-pointer text-white hover:text-blue-500 transition-all duration-300 ease-in-out">
-            <FaRegUserCircle />
+            <Link to="/profile">
+              <FaRegUserCircle />
+            </Link>
           </div>
 
           <Link
@@ -104,13 +104,18 @@ const Header = () => {
               onMouseLeave={() => setIsDropdownOpen(false)}
               className="cursor-pointer hover:bg-slate-700 px-4 py-2 flex items-center justify-center transition-colors duration-300 rounded-lg mx-1 font-bold"
             >
-              <Link to={"/product"}>Products</Link>
+            <Link to={"/product"}>
+
+              Products
+
+            </Link>
             </div>
             {isDropdownOpen && (
               <ul
-                className="absolute bg-slate-600 text-white shadow-lg rounded-lg w-full mt-0 z-10"
+                className="absolute bg-slate-600 text-white shadow-lg rounded-lg w-full mt-0 z-10 overflow-hidden"
                 onMouseEnter={() => setIsDropdownOpen(true)}
                 onMouseLeave={() => setIsDropdownOpen(false)}
+                onClick={() => setIsDropdownOpen(false)}
               >
                 <div className="px-4 py-2">Filter</div>
                 <li className="relative">

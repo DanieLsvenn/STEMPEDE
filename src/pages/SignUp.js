@@ -31,7 +31,7 @@ const SignUp = () => {
     <section id="signup" className="bg-gray-100 min-h-screen flex items-center">
       <div className="w-1/2 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-5xl font-bold text-orange-500">
+          <h1 className="text-5xl font-bold text-yellow-500">
             Sign Up <span className="text-gray-800">Now!</span>
           </h1>
         </div>
@@ -100,7 +100,7 @@ const SignUp = () => {
                 />
               </div>
 
-              <div>
+              <div className="grid">
                 <label className="font-medium mb-1">Password:</label>
                 <div className="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500">
                   <input
@@ -121,7 +121,7 @@ const SignUp = () => {
                 </div>
               </div>
 
-              <div>
+              <div className="grid">
                 <label className="font-medium mb-1">Confirm Password:</label>
                 <div className="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500">
                   <input

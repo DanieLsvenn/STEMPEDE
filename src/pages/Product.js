@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import all_product from "./../assets/products/all_products.js";
+import { IoMdAddCircle } from "react-icons/io";
+import { Context } from "../context/Context.js";
 
 const Product = () => {
   const [searchTerm, setSearchTerm] = useState(""); // For search
   const [selectedBrand, setSelectedBrand] = useState("All"); // For filtering by brand
   const [sortType, setSortType] = useState("default"); // For sorting
+  const {addToCart} = useContext(Context);
 
   // Filter products by search term and selected brand
   const filteredProducts = all_product.filter((product) => {
@@ -33,7 +36,7 @@ const Product = () => {
   ];
 
   return (
-    <div className="p-4 pt-40">
+    <div className="p-4 pt-10">
       <h1 className="text-2xl font-bold mb-4">Product List</h1>
 
       {/* Search Bar */}
@@ -93,7 +96,12 @@ const Product = () => {
                   alt={product.name}
                   className="h-40 w-full object-cover rounded-md mb-4"
                 />
-                <h2 className="text-xl font-bold">{product.name}</h2>
+                <div className="flex justify-between items-center">
+                  <h2 className="text-xl font-bold">{product.name}</h2>
+                  <div onClick={()=>{addToCart(product.id)}} className="text-blue-500 hover:text-blue-700 hover:scale-105 transition-all">
+                    <IoMdAddCircle />
+                  </div>
+                </div>
                 <p className="text-gray-500">{product.brand}</p>
                 <p className="text-lg font-semibold text-gray-700">
                   ${product.price}
