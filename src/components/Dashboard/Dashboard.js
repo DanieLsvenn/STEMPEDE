@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 import Users from "./Users";
+import Staffs from './Staffs'
 import Orders from "./Orders";
 import Card from "./Card";
 import { FaUsers, FaShoppingCart, FaDollarSign } from "react-icons/fa";
@@ -15,6 +16,8 @@ const Dashboard = () => {
     switch (selectedSection) {
       case "userManagement":
         return <Users />;
+      case "staffManagement":
+        return <Staffs />
       case "orderManagement":
         return <Orders />;
       case "productManagement":

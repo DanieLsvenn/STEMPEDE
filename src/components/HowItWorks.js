@@ -15,19 +15,19 @@ const HowItWorks = () => {
             <div className='flex flex-col items-center justify-center h-full'>
                 <div className='text-lg bg-yellow-400 text-white w-10 h-10 p-1 flex items-center justify-center rounded-full'>1</div>
                 <div className='font-bold py-4'>Order</div>
-                <img className='w-[300px] h-[220px]' src={step1} alt=''/>
+                <img className='w-[300px] h-[220px] overflow-hidden' src={step1} alt=''/>
             </div>
         
             <div className='flex flex-col items-center'>
                 <div className='text-lg bg-yellow-400 text-white w-10 h-10 p-1 flex items-center justify-center rounded-full'>2</div>
                 <div className='font-bold py-4'>Check Your Mail</div>
-                <img className='w-[300px] h-[220px]' src={step2} alt=''/>
+                <img className='w-[300px] h-[220px] overflow-hidden' src={step2} alt=''/>
             </div>
 
             <div className='flex flex-col items-center justify-center h-full'>
                 <div className='text-lg bg-yellow-400 text-white w-10 h-10 p-1 flex items-center justify-center rounded-full'>3</div>
                 <div className='font-bold py-4'>Study</div>
-                <img className='w-[300px] h-[220px]' src={step3} alt=''/>
+                <img className='w-[300px] h-[220px] overflow-hidden' src={step3} alt=''/>
             </div>
         </div>
     </div>

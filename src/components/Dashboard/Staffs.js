@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { IoMdCopy } from "react-icons/io";
 // import { getUsers } from "../../api";
 
-const Users = () => {
+const Staffs = () => {
   const [users, setUsers] = useState([]);
 
   // useEffect(() => {
@@ -16,7 +16,7 @@ const Users = () => {
 
   return (
     <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md mt-4">
-      <h2 className="text-lg font-bold mb-2">Manage Users</h2>
+      <h2 className="text-lg font-bold mb-2">Manage Staffs</h2>
       <table className="min-w-full table-auto text-sm"> {/* Added text-sm for smaller text */}
         <thead className="bg-gray-200 dark:bg-gray-800">
           <tr>
@@ -36,7 +36,7 @@ const Users = () => {
             <td className="border px-2 py-1">seizurebabe@gmail.com</td>
             <td className="border px-2 py-1">123456789</td>
             <td className="border px-2 py-1">Nguyen Nhu Thanh</td>
-            <td className="border px-2 py-1 relative max-w-xs overflow-hidden">
+            <td className="border px-2 py-1 relative max-w-xs overflow-hidden items-center justify-center">
               <span
                 className="whitespace-nowrap overflow-hidden text-ellipsis"
                 style={{
@@ -75,6 +75,7 @@ const Users = () => {
                 </div>
               </button>
             </td>
+
             <td className="border px-2 py-1">
               <div className="flex justify-center items-center">
                 <button className="bg-red-500 text-white text-xs px-2 py-1 rounded"> {/* Adjusted padding and font size */}
@@ -89,4 +90,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Staffs;

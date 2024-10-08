@@ -45,7 +45,7 @@ const Topbar = () => {
         <div className="relative">
           <button className="relative text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">
             <FontAwesomeIcon icon={faBell} />
-            <span className="absolute top-0 right-0 h-3 w-3 bg-red-500 rounded-full"></span>
+            <span className="absolute top-0 left-2 h-3 w-3 bg-red-500 rounded-full"></span>
           </button>
         </div>
 
@@ -63,19 +63,19 @@ const Topbar = () => {
                 href="#"
                 className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
               >
-                Hồ sơ
+                Profile
               </a>
               <a
                 href="#"
                 className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
               >
-                Cài đặt
+                Settings
               </a>
               <a
                 href="#"
                 className="block px-4 py-2 text-sm text-red-500 hover:bg-gray-200 dark:hover:bg-gray-600"
               >
-                Đăng xuất
+                Logout
               </a>
             </div>
           )}

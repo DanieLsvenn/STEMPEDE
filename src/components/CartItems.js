@@ -52,7 +52,7 @@ const CartItems = () => {
                     </div>
                 </div>
                 <button className='rounded-lg bg-blue-500 transition-all hover:bg-blue-700 hover:scale-105'>PROCEED TO CHECKOUT</button>
-                <div className='flex items-justify-start rounded-lg text-blue-500 hover:text-blue-700 underline'><RiArrowLeftDoubleFill /> Back to products</div>
+                <div className='flex items-center rounded-lg text-blue-500 hover:text-blue-700 underline'><RiArrowLeftDoubleFill /> Back to products</div>
             </div>
         </div>
     </div>

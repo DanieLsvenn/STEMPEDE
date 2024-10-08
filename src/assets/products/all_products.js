@@ -389,7 +389,7 @@ let all_product = [
       age: "8-12",
       image: p39_img,
       price: 50.0,
-      description: "Item 39"
+      description: "Item 39",
   },
   {
       id: 40,
