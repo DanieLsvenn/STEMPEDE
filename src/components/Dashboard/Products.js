@@ -16,6 +16,7 @@ const Products = () => {
       age: "8-12",
       image: p1_img,
       price: 50.0,
+      description: 'Item 1'
     },
     {
       id: 2,
@@ -24,6 +25,7 @@ const Products = () => {
       age: "8-12",
       image: p2_img,
       price: 50.0,
+      description: 'Item 2'
     },
     {
       id: 3,
@@ -32,6 +34,7 @@ const Products = () => {
       age: "8-12",
       image: p3_img,
       price: 50.0,
+      description: 'Item 3'
     },
     {
       id: 39,
@@ -40,6 +43,7 @@ const Products = () => {
       age: "3-7",
       image: p39_img,
       price: 50.0,
+      description: 'Item 39'
     },
     {
       id: 40,
@@ -48,6 +52,7 @@ const Products = () => {
       age: "8-12",
       image: p40_img,
       price: 30.0,
+      description: 'Item 40'
     },
     // Add more products here
   ]);
@@ -69,6 +74,7 @@ const Products = () => {
             age: "",
             image: "",
             price: "",
+            description: "",
           } // If adding, start with empty fields
     );
     setIsModalOpen(true); // Open the modal
@@ -129,6 +135,12 @@ const Products = () => {
   return (
     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mt-6">
       <h2 className="text-xl font-bold mb-4">Manage Products</h2>
+      <button
+        className="bg-green-500 text-white px-4 py-2 rounded"
+        onClick={() => openModal()}
+      >
+        Add
+      </button>
       <table className="min-w-full table-auto">
         <thead className="bg-gray-200 dark:bg-gray-800">
           <tr>
@@ -138,6 +150,7 @@ const Products = () => {
             <th className="border px-4 py-2">Brand</th>
             <th className="border px-4 py-2">Age Range</th>
             <th className="border px-4 py-2">Price</th>
+            <th className="border px-4 py-2">Description</th>
             <th className="border px-4 py-2">Actions</th>
           </tr>
         </thead>
@@ -158,6 +171,7 @@ const Products = () => {
               <td className="border px-4 py-2">{product.brand}</td>
               <td className="border px-4 py-2">{product.age}</td>
               <td className="border px-4 py-2">${product.price}</td>
+              <td className="border px-4 py-2">{product.description}</td>
               <td className="border px-4 py-2">
                 <button
                   className="bg-yellow-500 text-white px-4 py-2 mr-2 rounded"
@@ -170,12 +184,6 @@ const Products = () => {
                   onClick={() => openDeleteModal(product)}
                 >
                   Delete
-                </button>
-                <button
-                  className="bg-green-500 text-white px-4 py-2 rounded"
-                  onClick={() => openModal()}
-                >
-                  Add
                 </button>
               </td>
             </tr>
@@ -238,7 +246,20 @@ const Products = () => {
                   onChange={handleInputChange}
                 />
               </div>
+
+              <div>
+                <label>Description:</label>
+                <input
+                  className="border p-2 w-full"
+                  name="description"
+                  type="text"
+                  value={selectedProduct.description}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
+
+            
 
             <div className="mt-4 flex justify-end">
               <button
