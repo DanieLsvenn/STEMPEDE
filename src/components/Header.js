@@ -12,8 +12,8 @@ const Header = () => {
   const [isProduct2DropdownOpen, setIsProduct2DropdownOpen] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const {getTotalCartItems}=useContext(Context);
-  
+  const { getTotalCartItems } = useContext(Context);
+
   return (
     <div className=" bg-slate-800 text-white py-3 w-full z-20">
       <div className="container mx-auto flex items-center justify-between gap-20">
@@ -22,8 +22,6 @@ const Header = () => {
             <Logo />
           </Link>
         </div>
-
-        
 
         {/* <div className="hidden lg:flex items-center">
           <div className="relative group">
@@ -84,7 +82,7 @@ const Header = () => {
           </Link>
         </div>
       </div>
-      
+
       <div className="container mx-auto flex items-center px-4 justify-between">
         {/* <MdOutlineArrowDropDownCircle className='w-8 h-8' /> */}
         <ul className="flex flex-grow justify-between items-center py-4">
@@ -103,11 +101,7 @@ const Header = () => {
               onMouseLeave={() => setIsDropdownOpen(false)}
               className="cursor-pointer hover:bg-slate-700 px-4 py-2 flex items-center justify-center transition-colors duration-300 rounded-lg mx-1 font-bold"
             >
-            <Link to={"/product"}>
-
-              Products
-
-            </Link>
+              <Link to={"/product"}>Products</Link>
             </div>
             {isDropdownOpen && (
               <ul
@@ -133,20 +127,23 @@ const Header = () => {
                       onMouseEnter={() => setIsProduct1DropdownOpen(true)}
                       onMouseLeave={() => setIsProduct1DropdownOpen(false)}
                     >
-                        {['3-7', '8-12', '13-17'].map((age) => (
-                            <li key={age} className='px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg'>
-                                <Link 
-                                    to={`/shop-category/${age}`} 
-                                    onClick={() => {
-                                    console.log(`Navigating to: ${age}`);
-                                    setIsProduct1DropdownOpen(false);
-                                    }}
-                                    style={{ textDecoration: 'none' }}
-                                >
-                                {age.charAt(0).toUpperCase() + age.slice(1)}
-                                </Link>
-                            </li>
-                        ))}
+                      {["3-7", "8-12", "13-17"].map((age) => (
+                        <li
+                          key={age}
+                          className="px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg"
+                        >
+                          <Link
+                            to={`/shop-category/${age}`}
+                            onClick={() => {
+                              console.log(`Navigating to: ${age}`);
+                              setIsProduct1DropdownOpen(false);
+                            }}
+                            style={{ textDecoration: "none" }}
+                          >
+                            {age.charAt(0).toUpperCase() + age.slice(1)}
+                          </Link>
+                        </li>
+                      ))}
                     </ul>
                   )}
                 </li>
@@ -167,27 +164,32 @@ const Header = () => {
                       onMouseEnter={() => setIsProduct2DropdownOpen(true)}
                       onMouseLeave={() => setIsProduct2DropdownOpen(false)}
                     >
-                        {['poraxy', 'deuxper', 'vex', 'lego', 'stemtoy'].map((brand) => (
-                            <li key={brand} className='px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg'>
-                                <Link 
-                                    to={`/shop-category/${brand}`} 
-                                    onClick={() => {
-                                    console.log(`Navigating to: ${brand}`);
-                                    setIsProduct2DropdownOpen(false);
-                                    }}
-                                    style={{ textDecoration: 'none' }}
-                                >
-                                {brand.charAt(0).toUpperCase() + brand.slice(1)}
-                                </Link>
-                            </li>
-                        ))}
+                      {["poraxy", "deuxper", "vex", "lego", "stemtoy"].map(
+                        (brand) => (
+                          <li
+                            key={brand}
+                            className="px-4 py-2 hover:bg-slate-200 hover:text-black rounded-lg"
+                          >
+                            <Link
+                              to={`/shop-category/${brand}`}
+                              onClick={() => {
+                                console.log(`Navigating to: ${brand}`);
+                                setIsProduct2DropdownOpen(false);
+                              }}
+                              style={{ textDecoration: "none" }}
+                            >
+                              {brand.charAt(0).toUpperCase() + brand.slice(1)}
+                            </Link>
+                          </li>
+                        )
+                      )}
                     </ul>
                   )}
                 </li>
 
                 <li className="relative">
                   <div className="hover:bg-slate-200 hover:text-black px-4 py-2 flex items-center justify-between">
-                    Lab Specials
+                    <Link to={"/labspecial"}>Lab Specials</Link>
                   </div>
                 </li>
               </ul>
