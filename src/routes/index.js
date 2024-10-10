@@ -11,7 +11,8 @@ import ProductDetail from "../pages/ProductDetail";
 import Product from "../pages/Product";
 import ProductPage from "../pages/ProductPage";
 import Documentation from "../pages/Documentation";
-import Profile from "../pages/Profile"
+import Profile from "../pages/Profile";
+import LabSpecial from "../pages/LabSpecial";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -61,7 +62,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile />
+        element: <Profile />,
+      },
+      {
+        path: "/labspecial",
+        element: <LabSpecial />,
       },
     ],
   },
