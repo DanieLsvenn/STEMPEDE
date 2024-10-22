@@ -8,7 +8,9 @@ const Product = () => {
   const [searchTerm, setSearchTerm] = useState(""); // For search
   const [selectedBrand, setSelectedBrand] = useState("All"); // For filtering by brand
   const [sortType, setSortType] = useState("default"); // For sorting
-  const {addToCart} = useContext(Context);
+  const [currentPage, setCurrentPage] = useState(1); // For pagination
+  const [productsPerPage, setProductsPerPage] = useState(8); // For selecting how many products per page
+  const { addToCart } = useContext(Context);
 
   // Filter products by search term and selected brand
   const filteredProducts = all_product.filter((product) => {
@@ -28,6 +30,16 @@ const Product = () => {
     if (sortType === "brand_desc") return b.brand.localeCompare(a.brand);
     return 0;
   });
+
+  // Pagination Logic
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = sortedProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const totalPages = Math.ceil(sortedProducts.length / productsPerPage);
 
   // Get all unique brands for the filter dropdown
   const uniqueBrands = [
@@ -80,13 +92,28 @@ const Product = () => {
         </select>
       </div>
 
-      {/* Product Grid */}
+      {/* Products Per Page */}
+      <div className="flex items-center mb-4">
+        <label className="mr-2 font-semibold">Show:</label>
+        <select
+          value={productsPerPage}
+          onChange={(e) => setProductsPerPage(Number(e.target.value))}
+          className="border border-gray-300 rounded px-4 py-2"
+        >
+          <option value="4">4</option>
+          <option value="8">8</option>
+          <option value="12">12</option>
+          <option value="16">16</option>
+        </select>
+        <span className="ml-2">products per page</span>
+      </div>
 
+      {/* Product Grid */}
       <div className="min-h-screen bg-gray-100 py-10">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl font-bold text-center mb-10">Our Products</h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {sortedProducts.map((product) => (
+            {currentProducts.map((product) => (
               <div
                 key={product.id}
                 className="bg-white p-5 rounded-lg shadow-lg"
@@ -98,7 +125,12 @@ const Product = () => {
                 />
                 <div className="flex justify-between items-center">
                   <h2 className="text-xl font-bold">{product.name}</h2>
-                  <div onClick={()=>{addToCart(product.id)}} className="text-blue-500 hover:text-blue-700 hover:scale-105 transition-all">
+                  <div
+                    onClick={() => {
+                      addToCart(product.id);
+                    }}
+                    className="text-blue-500 hover:text-blue-700 hover:scale-105 transition-all"
+                  >
                     <IoMdAddCircle />
                   </div>
                 </div>
@@ -114,6 +146,35 @@ const Product = () => {
                 </Link>
               </div>
             ))}
+          </div>
+
+          {/* Pagination */}
+          <div className="mt-6 flex justify-center space-x-2">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage(currentPage - 1)}
+              className={`px-4 py-2 border rounded-md ${
+                currentPage === 1
+                  ? "bg-gray-200 cursor-not-allowed"
+                  : "bg-blue-500 text-white"
+              }`}
+            >
+              Previous
+            </button>
+            <span className="px-4 py-2 border rounded-md">
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage(currentPage + 1)}
+              className={`px-4 py-2 border rounded-md ${
+                currentPage === totalPages
+                  ? "bg-gray-200 cursor-not-allowed"
+                  : "bg-blue-500 text-white"
+              }`}
+            >
+              Next
+            </button>
           </div>
         </div>
       </div>

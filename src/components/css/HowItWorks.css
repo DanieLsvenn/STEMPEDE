@@ -1,0 +1,19 @@
+.how-it-works {
+    position: relative; /* Needed for the pseudo-element */
+    z-index: 1;
+  }
+  
+  .how-it-works::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../../assets/blue_grid.png'); /* Path to your background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.25; /* Adjust opacity here */
+    z-index: -1; /* Keeps the background behind the content */
+  }

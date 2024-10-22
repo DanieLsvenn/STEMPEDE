@@ -1,5 +1,6 @@
 import React from 'react'
 import review1 from '../assets/reviews/review_1.jpg'
+import './css/Reviews.css'
 
 const Reviews = () => {
   return (
@@ -28,61 +29,78 @@ const Reviews = () => {
                 </div>
             </div>
             
-            <div className='w-full flex flex-wrap justify-center'>
-
-                <div className="flex flex-col items-center border-4 border-slate-800 m-2 w-1/3">
-                    <img src={review1} alt="" className="mb-2" />
-                    <p className="text-lg font-semibold">John Doe</p>
-                    <div className="flex mb-2">
-                        {/* Star rating */}
-                        <span>⭐</span>
-                        <span>⭐</span>
-                        <span>⭐</span>
-                        <span>⭐</span>
-                        <span>⭐</span>
-                    </div>
-                    <p className="p-4">"Lorem ipsum dolor sit amet, consectetur adipiscing elit."</p>
+            <div className="w-full no-scrollbar overflow-y-hidden overflow-x-scroll p-8 bg-yellow-500 relative mt-5 shadow-md h-96">
+            <div className="w-max flex flex-nowrap justify-start">
+                <div className="flex flex-col items-center border-4 bg-yellow-600 border-slate-800 m-2 w-64">
+                <img src={review1} alt="" className="mb-2" />
+                <p className="text-lg font-semibold">John Doe</p>
+                <div className="flex mb-2">
+                    {/* Star rating */}
+                    <span>⭐</span>
+                    <span>⭐</span>
+                    <span>⭐</span>
+                    <span>⭐</span>
+                    <span>⭐</span>
+                </div>
+                <p className="p-4">"Lorem ipsum dolor sit amet, consectetur adipiscing elit."</p>
                 </div>
 
-                <div className="flex flex-col items-center border-4 border-slate-800 m-2 w-1/3">
-                        <img src={review1} alt="" className=" mb-2" />
-                        <p className="text-lg font-semibold">Jane Smith</p>
-                        <div className="flex mb-2">
-                            <span>⭐</span>
-                            <span>⭐</span>
-                            <span>⭐</span>
-                            <span>⭐</span>
-                            <span>⭐</span>
-                        </div>
-                        <p className="p-4">"Sed ut perspiciatis unde omnis iste."</p>
+                <div className="flex flex-col items-center border-4 bg-yellow-600 border-slate-800 m-2 w-64">
+                <img src={review1} alt="" className="mb-2" />
+                <p className="text-lg font-semibold">John Doe</p>
+                <div className="flex mb-2">
+                    {/* Star rating */}
+                    <span>⭐</span>
+                    <span>⭐</span>
+                    <span>⭐</span>
+                    <span>⭐</span>
+                    <span>⭐</span>
+                </div>
+                <p className="p-4">"Lorem ipsum dolor sit amet, consectetur adipiscing elit."</p>
                 </div>
 
-                <div className="flex flex-col items-center border-4 border-slate-800 m-2 w-1/3">
-                        <img src={review1} alt="" className=" mb-2" />
-                        <p className="text-lg font-semibold">Jane Smith</p>
-                        <div className="flex mb-2">
-                            <span>⭐</span>
-                            <span>⭐</span>
-                            <span>⭐</span>
-                            <span>⭐</span>
-                            <span>⭐</span>
-                        </div>
-                        <p className="p-4">"Error sit voluptatem accusantium doloremque laudantium."</p>
+                <div className="flex flex-col items-center border-4 bg-yellow-600 border-slate-800 m-2 w-64">
+                <img src={review1} alt="" className=" mb-2" />
+                <p className="text-lg font-semibold">Jane Smith</p>
+                <div className="flex mb-2">
+                    <span>⭐</span>
+                    <span>⭐</span>
+                    <span>⭐</span>
+                    <span>⭐</span>
+                    <span>⭐</span>
+                </div>
+                <p className="p-4">"Sed ut perspiciatis unde omnis iste."</p>
                 </div>
 
-                <div className="flex flex-col items-center border-4 border-slate-800 m-2 w-1/3">
-                        <img src={review1} alt="" className=" mb-2" />
-                        <p className="text-lg font-semibold">Jane Smith</p>
-                        <div className="flex mb-2">
-                            <span>⭐</span>
-                            <span>⭐</span>
-                            <span>⭐</span>
-                            <span>⭐</span>
-                            <span>⭐</span>
-                        </div>
-                        <p className="p-4">"Sit voluptatem accusantium doloremque laudantium."</p>
+                <div className="flex flex-col items-center border-4 bg-yellow-600 border-slate-800 m-2 w-64">
+                <img src={review1} alt="" className=" mb-2" />
+                <p className="text-lg font-semibold">Jane Smith</p>
+                <div className="flex mb-2">
+                    <span>⭐</span>
+                    <span>⭐</span>
+                    <span>⭐</span>
+                    <span>⭐</span>
+                    <span>⭐</span>
+                </div>
+                <p className="p-4">"Error sit voluptatem accusantium doloremque laudantium."</p>
+                </div>
+
+                <div className="flex flex-col items-center border-4 bg-yellow-600 border-slate-800 m-2 w-64">
+                <img src={review1} alt="" className=" mb-2" />
+                <p className="text-lg font-semibold">Jane Smith</p>
+                <div className="flex mb-2">
+                    <span>⭐</span>
+                    <span>⭐</span>
+                    <span>⭐</span>
+                    <span>⭐</span>
+                    <span>⭐</span>
+                </div>
+                <p className="p-4">"Sit voluptatem accusantium doloremque laudantium."</p>
                 </div>
             </div>
+            </div>
+
+           
         </div>
     </div>
   )

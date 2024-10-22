@@ -1,6 +1,5 @@
 import React from 'react'
 import labSpecial from '../assets/lab_special.jpg'
-import '../components/css/LabSpecial.css'
 
 const LabSpecial = () => {
   return (
