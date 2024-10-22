@@ -3,10 +3,11 @@ import step1 from '../assets/steps/step_1.jpg'
 import step2 from '../assets/steps/step_2.jpg'
 import step3 from '../assets/steps/step_3.jpg'
 import grid_box from '../assets/blue_grid.png'
+import '../components/css/HowItWorks.css'
 
 const HowItWorks = () => {
   return (
-    <div className='flex flex-col items-center justify-center'>
+    <div className='how-it-works flex flex-col items-center justify-center'>
         <div className='font-bold text-4xl text-center mt-10'>
             How Lab Special Works
         </div>
