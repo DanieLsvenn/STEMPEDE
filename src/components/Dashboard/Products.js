@@ -12,7 +12,7 @@ import {
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null); // For both add/edit
-  const [isModalOpen, setIsModalOpen] = useState(false); // Single modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Modal for delete confirmation
   const [productToDelete, setProductToDelete] = useState(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
