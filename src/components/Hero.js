@@ -79,7 +79,7 @@ const Hero = () => {
   }, [timeRunning, timeAutoNext]);
 
   return (
-    <div className='h-full py-12'>
+    <div className='h-full mb-12'>
       <div className="carousel" ref={carouselRef}>
         <div className="list" ref={sliderRef}>
           <div className="item">

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../context/Context";
 
 const Header = () => {
-  const [menu, setMenu] = useState("home");
+  // const [menu, setMenu] = useState("home");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isProduct1DropdownOpen, setIsProduct1DropdownOpen] = useState(false);
   const [isProduct2DropdownOpen, setIsProduct2DropdownOpen] = useState(false);
@@ -16,12 +16,11 @@ const Header = () => {
 
   return (
     <div className=" bg-slate-800 text-white py-3 w-full z-20">
-      <div className="container mx-auto flex items-center px-4 justify-between">
-        <div className="flex justify-left items-center gap-4 py-3">
+      <div className="container mx-auto flex items-center justify-between gap-20">
+        <div className="flex justify-left items-center gap-10 py-3">
           <Link to="/">
-            <Logo w={90} h={50} />
+            <Logo />
           </Link>
-          <div className="text-4xl font-semibold">S T E M P E D E</div>
         </div>
 
         {/* <div className="hidden lg:flex items-center">
@@ -49,7 +48,9 @@ const Header = () => {
           </div>
         </div> */}
 
-        <div className="flex items-center gap-5">
+        
+
+        <div className="flex flex-wrap items-center gap-5">
           <div className="text-2xl relative cursor-pointer text-white hover:text-blue-500 transition-all duration-300 ease-in-out">
             <Link to="/cart">
               <FaShoppingCart />
@@ -104,12 +105,12 @@ const Header = () => {
             </div>
             {isDropdownOpen && (
               <ul
-                className="absolute bg-slate-600 text-white shadow-lg rounded-lg w-full mt-0 z-10 overflow-hidden"
+                className="absolute bg-slate-600 text-white shadow-lg rounded-lg w-full mt-0 z-10"
                 onMouseEnter={() => setIsDropdownOpen(true)}
                 onMouseLeave={() => setIsDropdownOpen(false)}
                 onClick={() => setIsDropdownOpen(false)}
               >
-                <div className="px-4 py-2">Filter</div>
+                <div className="px-4 py-2 font-semibold">Filter</div>
                 <li className="relative">
                   <div
                     onMouseEnter={() =>
@@ -122,7 +123,7 @@ const Header = () => {
                   </div>
                   {isProduct1DropdownOpen && (
                     <ul
-                      className="absolute left-full top-0 bg-slate-500 text-white shadow-lg rounded-lg w-full mt-0 z-10"
+                      className="absolute left-full top-0 bg-slate-600 text-white shadow-lg rounded-lg w-full mt-0 z-10"
                       onMouseEnter={() => setIsProduct1DropdownOpen(true)}
                       onMouseLeave={() => setIsProduct1DropdownOpen(false)}
                     >
@@ -159,7 +160,7 @@ const Header = () => {
                   </div>
                   {isProduct2DropdownOpen && (
                     <ul
-                      className="absolute left-full top-0 bg-slate-500 text-white shadow-lg rounded-lg w-full mt-0 z-10"
+                      className="absolute left-full top-0 bg-slate-600 text-white shadow-lg rounded-lg w-full mt-0 z-10"
                       onMouseEnter={() => setIsProduct2DropdownOpen(true)}
                       onMouseLeave={() => setIsProduct2DropdownOpen(false)}
                     >
@@ -213,7 +214,7 @@ const Header = () => {
         </ul>
       </div>
     </div>
-  );
+   )
 };
 
 export default Header;

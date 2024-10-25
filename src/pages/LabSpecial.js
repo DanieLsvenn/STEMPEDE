@@ -62,7 +62,7 @@ function LabSpecial() {
         <img
           src="https://img.freepik.com/premium-vector/stem-science-line-concept-colored-square-banner-with-4-signs-science-technology-engineering-math-vector-linear-colored-illustration_104589-5763.jpg"
           alt="Stem Kit"
-          className="w-full h-full object-contain"
+          className="w-full h-full"
         />
         <div className="absolute inset-0 flex items-center">
           <h1 className="text-9xl text-center font-bold text-white opacity-25">
