@@ -1,18 +1,36 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import all_product from "./../assets/products/all_products"; // Your product array data
 import { useEffect } from "react";
-import { Context } from '../context/Context';
+import { Context } from "../context/Context";
 import DescriptionBox from "../components/DescriptionBox";
-import RelatedProduct from "../components/RelatedProducts"
+import RelatedProduct from "../components/RelatedProducts";
+import { fetchProductById } from "../api/product";
 
 const ProductDetail = () => {
   const { productId } = useParams(); // Get the product ID from the URL params
-  const product = all_product.find((p) => p.id === parseInt(productId)); // Find the product by ID
-  const {addToCart} = useContext(Context); //Add to cart function
+  const [product, setProduct] = useState(null); // State for product
+  const { addToCart } = useContext(Context); //Add to cart function
   useEffect(() => {
+    const getProduct = async () => {
+      if (!productId) {
+        console.error("Product ID is undefined");
+        return;
+      }
+      try {
+        const fetchedProduct = await fetchProductById(productId);
+        if (fetchedProduct && fetchedProduct.success) {
+          setProduct(fetchedProduct.data);
+        } else {
+          console.error("Product not found:", fetchedProduct);
+        }
+      } catch (error) {
+        console.error("Failed to fetch product:", error);
+      }
+    };
+    getProduct();
     window.scrollTo(0, 0);
-  }, []);
+  }, [productId]);
+
   if (!product) {
     return <div>Product not found</div>;
   }
@@ -25,19 +43,25 @@ const ProductDetail = () => {
             <div className="flex-1">
               <img
                 src={product.image}
-                alt={product.name}
+                alt={product.productName}
                 className="h-80 w-full object-cover rounded-md mb-4"
               />
             </div>
             <div className="flex-1">
-              <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
+              <h1 className="text-3xl font-bold mb-4">{product.productName}</h1>
               <p className="text-xl text-gray-500 mb-2">
-                Brand: {product.brand}
+                Brand: {product.subcategoryName}
               </p>
+              <p className="text-xl text-gray-500 mb-2">Age: {product.ages}</p>
               <p className="text-2xl font-semibold text-gray-800 mb-6">
                 ${product.price}
               </p>
-              <button onClick={()=>{addToCart(product.id)}} className="bg-blue-500 text-white px-5 py-2 rounded-md transition-all hover:bg-blue-700">
+              <button
+                onClick={() => {
+                  addToCart(product.productID);
+                }}
+                className="bg-blue-500 text-white px-5 py-2 rounded-md transition-all hover:bg-blue-700"
+              >
                 Add to Cart
               </button>
               <Link to="/product">

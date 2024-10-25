@@ -1,66 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import p1_img from "../../assets/products/product_1.png";
-import p2_img from "../../assets/products/product_2.png";
-import p3_img from "../../assets/products/product_3.png";
-import p39_img from "../../assets/products/product_39.png";
-import p40_img from "../../assets/products/product_40.png";
-const Products = () => {
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      name: "Stem",
-      brand: "Poraxy",
-      age: "8-12",
-      image: p1_img,
-      price: 50.0,
-      description: 'Item 1'
-    },
-    {
-      id: 2,
-      name: "Stem",
-      brand: "Poraxy",
-      age: "8-12",
-      image: p2_img,
-      price: 50.0,
-      description: 'Item 2'
-    },
-    {
-      id: 3,
-      name: "Stem",
-      brand: "Poraxy",
-      age: "8-12",
-      image: p3_img,
-      price: 50.0,
-      description: 'Item 3'
-    },
-    {
-      id: 39,
-      name: "Stem",
-      brand: "StemToy",
-      age: "3-7",
-      image: p39_img,
-      price: 50.0,
-      description: 'Item 39'
-    },
-    {
-      id: 40,
-      name: "Action Figure",
-      brand: "ToyBrand",
-      age: "8-12",
-      image: p40_img,
-      price: 30.0,
-      description: 'Item 40'
-    },
-    // Add more products here
-  ]);
+import {
+  addProduct,
+  deleteProduct,
+  fetchProducts,
+  updateProduct,
+} from "../../api/product"; // Import hàm fetchProducts
 
+const Products = () => {
+  const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null); // For both add/edit
   const [isModalOpen, setIsModalOpen] = useState(false); // Single modal
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Modal for delete confirmation
   const [productToDelete, setProductToDelete] = useState(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
+  // Fetch products from API when component mounts
+  useEffect(() => {
+    const getProducts = async () => {
+      const fetchedProducts = await fetchProducts();
+      if (fetchedProducts && fetchedProducts.success) {
+        setProducts(fetchedProducts.data.items);
+      } else {
+        toast.error("Failed to fetch products");
+      }
+    };
+    getProducts();
+  }, []);
 
   // Open the modal for editing or adding
   const openModal = (product = null) => {
@@ -68,10 +35,10 @@ const Products = () => {
       product
         ? { ...product } // If editing, populate with product data
         : {
-            id: products.length + 1,
-            name: "",
+            productID: products.length + 1,
+            productName: "",
             brand: "",
-            age: "",
+            ages: "",
             image: "",
             price: "",
             description: "",
@@ -80,32 +47,58 @@ const Products = () => {
     setIsModalOpen(true); // Open the modal
   };
 
+  const handleImageChange = (event) => {
+    const imageFile = event.target.files[0];
+    setSelectedProduct({ ...selectedProduct, image: imageFile });
+
+    const imageUrl = URL.createObjectURL(imageFile);
+    setImagePreviewUrl(imageUrl);
+  };
   // Save the edited or new product
-  const handleSaveProduct = () => {
+  const handleSaveProduct = async () => {
     // Check for validation errors
     if (
-      !selectedProduct.name ||
+      !selectedProduct.productName ||
       !selectedProduct.price ||
       isNaN(selectedProduct.price)
     ) {
       toast.error("Error!");
       return;
     }
+    const formData = new FormData();
 
-    if (selectedProduct.id <= products.length) {
-      // Update existing product
-      setProducts(
-        products.map((product) =>
-          product.id === selectedProduct.id ? selectedProduct : product
-        )
-      );
-      toast.success("Product edited successfully!"); // Trigger alert for update
-    } else {
-      // Add new product
-      setProducts([...products, selectedProduct]);
-      toast.success("Product added successfully!"); // Trigger alert for adding
+    try {
+      formData.append("productName", selectedProduct.productName);
+      formData.append("price", selectedProduct.price);
+
+      // If an image is selected, append it to the formData
+      if (selectedProduct.image) {
+        formData.append("image", selectedProduct.image);
+      }
+      if (selectedProduct.productID <= products.length) {
+        // Update existing product
+        const updatedProduct = await updateProduct(
+          selectedProduct.productID,
+          formData
+        );
+        setProducts(
+          products.map((product) =>
+            product.productID === selectedProduct.productID
+              ? updatedProduct
+              : product
+          )
+        );
+        toast.success("Product edited successfully!"); // Trigger alert for update
+      } else {
+        // Add new product
+        const newProduct = await addProduct(formData);
+        setProducts([...products, newProduct]);
+        toast.success("Product added successfully!"); // Trigger alert for adding
+      }
+      setIsModalOpen(false); // Close modal after saving
+    } catch (error) {
+      toast.error("Failed to save product."); // Trigger error alert
     }
-    setIsModalOpen(false); // Close modal after saving
   };
 
   // Handle delete button click
@@ -115,10 +108,13 @@ const Products = () => {
   };
 
   // Confirm delete action
-  const handleConfirmDelete = () => {
+  const handleConfirmDelete = async () => {
     try {
+      await deleteProduct(productToDelete.productID);
       setProducts(
-        products.filter((product) => product.id !== productToDelete.id)
+        products.filter(
+          (product) => product.productID !== productToDelete.productID
+        )
       );
       toast.success("Product deleted successfully!"); // Trigger alert for delete
       setIsDeleteModalOpen(false); // Close the delete confirmation modal
@@ -156,20 +152,20 @@ const Products = () => {
         </thead>
         <tbody>
           {products.map((product) => (
-            <tr key={product.id}>
-              <td className="border px-4 py-2">{product.id}</td>
+            <tr key={product.productID}>
+              <td className="border px-4 py-2">{product.productID}</td>
               <td className="border px-4 py-2">
                 {product.image && (
                   <img
                     src={product.image}
-                    alt={product.name}
+                    alt={product.productName}
                     className="w-16 h-16 object-cover"
                   />
                 )}
               </td>
-              <td className="border px-4 py-2">{product.name}</td>
-              <td className="border px-4 py-2">{product.brand}</td>
-              <td className="border px-4 py-2">{product.age}</td>
+              <td className="border px-4 py-2">{product.productName}</td>
+              <td className="border px-4 py-2">{product.subcategoryName}</td>
+              <td className="border px-4 py-2">{product.ages}</td>
               <td className="border px-4 py-2">${product.price}</td>
               <td className="border px-4 py-2">{product.description}</td>
               <td className="border px-4 py-2">
@@ -200,18 +196,33 @@ const Products = () => {
         >
           <div className="bg-white p-6 rounded shadow-lg w-[500px]">
             <h2 className="text-xl mb-4">
-              {selectedProduct.id <= products.length
+              {selectedProduct.productID <= products.length
                 ? "Edit Product"
                 : "Add New Product"}
             </h2>
 
             <div className="grid gap-4">
               <div>
+                <input
+                  className="border p-2 w-full"
+                  name="image"
+                  type="file"
+                  onChange={handleImageChange}
+                />
+                {imagePreviewUrl && (
+                  <img
+                    src={imagePreviewUrl}
+                    alt="Selected"
+                    className="w-16 h-16 object-cover mt-2"
+                  />
+                )}
+              </div>
+              <div>
                 <label>Product Name:</label>
                 <input
                   className="border p-2 w-full"
                   name="name"
-                  value={selectedProduct.name}
+                  value={selectedProduct.productName}
                   onChange={handleInputChange}
                 />
               </div>
@@ -221,7 +232,7 @@ const Products = () => {
                 <input
                   className="border p-2 w-full"
                   name="brand"
-                  value={selectedProduct.brand}
+                  value={selectedProduct.subcategoryName}
                   onChange={handleInputChange}
                 />
               </div>
@@ -231,7 +242,7 @@ const Products = () => {
                 <input
                   className="border p-2 w-full"
                   name="age"
-                  value={selectedProduct.age}
+                  value={selectedProduct.ages}
                   onChange={handleInputChange}
                 />
               </div>
@@ -259,8 +270,6 @@ const Products = () => {
               </div>
             </div>
 
-            
-
             <div className="mt-4 flex justify-end">
               <button
                 className="bg-gray-500 text-white px-4 py-2 rounded mr-2"
@@ -272,7 +281,7 @@ const Products = () => {
                 className="bg-blue-500 text-white px-4 py-2 rounded"
                 onClick={handleSaveProduct}
               >
-                {selectedProduct.id <= products.length
+                {selectedProduct.productID <= products.length
                   ? "Save Changes"
                   : "Add Product"}
               </button>
