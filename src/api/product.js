@@ -1,9 +1,11 @@
 const API_URL = "https://localhost:7231/api/Product";
 
 // Fetch danh sách sản phẩm
-async function fetchProducts() {
+async function fetchProducts(pageNumber = 1, pageSize = 100) {
   try {
-    const response = await fetch(`${API_URL}/get-all`);
+    const response = await fetch(
+      `${API_URL}/get-all?pageNumber=${pageNumber}&pageSize=${pageSize}`
+    );
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }

@@ -21,8 +21,13 @@ const Login = () => {
     });
   };
 
+  const handleLogIn = () => {};
+
   return (
-    <section id="login" className="bg-gray-100 min-h-screen flex items-center flex-col">
+    <section
+      id="login"
+      className="bg-gray-100 min-h-screen flex items-center flex-col"
+    >
       <div className="w-1/2 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-5xl font-bold text-yellow-500 m-6">
@@ -36,7 +41,7 @@ const Login = () => {
         </div>
 
         <h2 className="text-center text-2xl font-bold mb-4">Login</h2>
-        
+
         <form className="flex flex-col gap-4">
           <div className="grid">
             <label className="font-medium mb-1">Email:</label>
@@ -77,7 +82,10 @@ const Login = () => {
             </Link>
           </div>
 
-          <button className="bg-blue-500 hover:bg-blue-700 text-white px-6 py-2 w-full rounded-full transition-all duration-200 transform hover:scale-105">
+          <button
+            onSubmit={handleLogIn}
+            className="bg-blue-500 hover:bg-blue-700 text-white px-6 py-2 w-full rounded-full transition-all duration-200 transform hover:scale-105"
+          >
             Login
           </button>
         </form>

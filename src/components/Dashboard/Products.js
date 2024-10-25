@@ -16,6 +16,8 @@ const Products = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Modal for delete confirmation
   const [productToDelete, setProductToDelete] = useState(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1); // State for current page
+  const [productsPerPage] = useState(8); // Number of products per page
   // Fetch products from API when component mounts
   useEffect(() => {
     const getProducts = async () => {
@@ -28,6 +30,16 @@ const Products = () => {
     };
     getProducts();
   }, []);
+  // Get current products for pagination
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   // Open the modal for editing or adding
   const openModal = (product = null) => {
@@ -151,7 +163,7 @@ const Products = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
+          {currentProducts.map((product) => (
             <tr key={product.productID}>
               <td className="border px-4 py-2">{product.productID}</td>
               <td className="border px-4 py-2">
@@ -186,6 +198,24 @@ const Products = () => {
           ))}
         </tbody>
       </table>
+      <div className="flex justify-center mt-8">
+        {Array.from(
+          { length: Math.ceil(products.length / productsPerPage) },
+          (_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => paginate(index + 1)}
+              className={`mx-1 px-3 py-1 rounded ${
+                currentPage === index + 1
+                  ? "bg-blue-500 text-white"
+                  : "bg-white text-blue-500 border border-blue-500"
+              }`}
+            >
+              {index + 1}
+            </button>
+          )
+        )}
+      </div>
 
       {/* Modal for adding/editing */}
       {isModalOpen && (

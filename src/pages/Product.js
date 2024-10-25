@@ -26,7 +26,7 @@ const Product = () => {
       }
     };
     getProducts();
-  }, []);
+  }, [products]);
 
   // Filter products by search term and selected subcategory
   const filteredProducts = products.filter((product) => {
