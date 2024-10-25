@@ -7,7 +7,7 @@ import {
   deleteProduct,
   fetchProducts,
   updateProduct,
-} from "../../api/product"; // Import hàm fetchProducts
+} from "../../api/product";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
