@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../context/MergedProvider";
 import loginIcon from "../assets/signin.gif";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import axios from '../api/axios';
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+
+const LOGIN_URL = 'api/Auth/login'
 
 const Login = () => {
+
+  const { setAuth } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
-    email: "",
+    emailOrUsername: "",
     password: "",
   });
 
@@ -21,6 +30,42 @@ const Login = () => {
     });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+     // Simulate authentication logic
+     const user = data.emailOrUsername; // Replace with actual user data
+     const pwd = data.password; // Replace with actual password data
+    
+    try {
+      const response = await axios.post(LOGIN_URL,
+        JSON.stringify({ ...data }),
+        {
+          headers: { 'Content-Type': 'application/json'},
+          withCredentials: true
+        }
+      );
+
+      console.log(JSON.stringify(response?.data));
+      const accessToken = response?.data?.accessToken;
+      const roles = response?.data?.roles;
+      setAuth({ user, pwd, roles, accessToken })
+      setData({ emailOrUsername: "", password: "" });
+      toast.success("Login successful!");
+
+    } catch(error) {
+      if (!error?.response) {
+        toast.error("No Server Response");
+      } else if (error.response?.status === 400) {
+        toast.error("Missing Email/Username or Password");
+      } else if (error.response?.status === 401) {
+        toast.error("Unauthorized");
+      } else {
+        toast.error("Login Failed");
+      }
+      
+    }
+  }
+
   const handleLogIn = () => {};
 
   return (
@@ -28,6 +73,7 @@ const Login = () => {
       id="login"
       className="bg-gray-100 min-h-screen flex items-center flex-col"
     >
+      <ToastContainer />
       <div className="w-1/2 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-5xl font-bold text-yellow-500 m-6">
@@ -42,16 +88,17 @@ const Login = () => {
 
         <h2 className="text-center text-2xl font-bold mb-4">Login</h2>
 
-        <form className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <div className="grid">
             <label className="font-medium mb-1">Email:</label>
             <input
               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              name="email"
-              value={data.email}
+              name="emailOrUsername"
+              value={data.emailOrUsername}
               onChange={handleOnChange}
-              type="email"
+              type="text"
               placeholder="Enter your email"
+              required
             />
           </div>
 
@@ -65,6 +112,7 @@ const Login = () => {
                 onChange={handleOnChange}
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
+                required
               />
               <button
                 type="button"

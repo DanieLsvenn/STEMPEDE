@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoMdAddCircle } from "react-icons/io";
-import { Context } from "../context/Context.js";
+import { CartContext } from '../context/MergedProvider.js';
 import { fetchProducts } from "../api/product.js";
 
 const Product = () => {
@@ -11,7 +11,7 @@ const Product = () => {
   const [products, setProducts] = useState([]); // State for products
   const [currentPage, setCurrentPage] = useState(1); // State for current page
   const [productsPerPage] = useState(8); // Number of products per page
-  const { addToCart } = useContext(Context);
+  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     const getProducts = async () => {

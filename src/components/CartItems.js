@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import "./css/CartItems.css";
-import { Context } from "../context/Context";
+import { CartContext } from "../context/MergedProvider";
 import { RxCross2 } from "react-icons/rx";
 import { RiArrowLeftDoubleFill } from "react-icons/ri";
 
 const CartItems = () => {
   const { products, cartItems, removeFromCart, getTotalCartAmount } =
-    useContext(Context);
+    useContext(CartContext);
   return (
     <div className="cartitems">
       <div className="cartitems-format-main">

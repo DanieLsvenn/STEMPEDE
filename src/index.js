@@ -5,14 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider } from 'react-router-dom';
 import router from './routes';
-import ContextProvider from './context/Context';
+import { MergedProvider } from './context/MergedProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ContextProvider>
+    <MergedProvider>
       <RouterProvider router={router} />
-    </ContextProvider>
+    </MergedProvider>
   </React.StrictMode>
 );
 

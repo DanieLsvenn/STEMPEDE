@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Context } from '../context/Context'
+import { CartContext } from '../context/MergedProvider'
 import poraxy_banner from '../assets/banner/poraxy_banner.png'
 import deuxper_banner from '../assets/banner/deuxper_banner.png'
 import vex_banner from '../assets/banner/vex_banner.png'
@@ -12,7 +12,7 @@ import Items from '../components/Items'
 import { Link, useParams } from 'react-router-dom';
 
 const ShopCategory = (props) => {
-  const {all_product} = useContext(Context);
+  const {all_product} = useContext(CartContext);
   const { category } = useParams();
   const isAgeCategory = ['3-7', '8-12', '13-17'].includes(category);
   return (

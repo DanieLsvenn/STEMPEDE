@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { Context } from "../context/Context";
+import { CartContext } from "../context/MergedProvider";
 import DescriptionBox from "../components/DescriptionBox";
 import RelatedProduct from "../components/RelatedProducts";
 import { fetchProductById } from "../api/product";
@@ -9,7 +9,7 @@ import { fetchProductById } from "../api/product";
 const ProductDetail = () => {
   const { productId } = useParams(); // Get the product ID from the URL params
   const [product, setProduct] = useState(null); // State for product
-  const { addToCart } = useContext(Context); //Add to cart function
+  const { addToCart } = useContext(CartContext); //Add to cart function
   useEffect(() => {
     const getProduct = async () => {
       if (!productId) {

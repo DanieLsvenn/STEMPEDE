@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import loginIcon from "../assets/signin.gif";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import axios from '../api/axios'
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+const SIGNUP_URL = 'api/Auth/register'
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -9,11 +14,14 @@ const SignUp = () => {
 
   const [data, setData] = useState({
     username: "",
-    email: "",
     password: "",
-    confirmPassword: "",
+    email: "",
+    fullName: "",
     phone: "",
     address: "",
+    role: "Customer",
+    isExternal: false,
+    externalProvider: ""
   });
 
   const handleOnChange = (e) => {
@@ -27,8 +35,35 @@ const SignUp = () => {
     });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (data.password !== data.confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    try{
+      const response = await axios.post(SIGNUP_URL,
+        JSON.stringify({ ...data }),
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true
+        }
+      );
+
+      console.log(JSON.stringify(response))
+      toast.success("Registration successful!");
+
+    } catch (error) {
+      console.error("Error during registration:", error);
+      toast.error("Error during registration");
+    } 
+  }
+
   return (
     <section id="signup" className="bg-gray-100 min-h-screen flex items-center">
+      <ToastContainer />
       <div className="w-1/2 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-5xl font-bold text-yellow-500">
@@ -36,7 +71,7 @@ const SignUp = () => {
           </h1>
         </div>
       </div>
-      <div className="bg-white shadow-lg rounded-lg w-full max-w-3xl mx-auto p-8">
+      <form className="bg-white shadow-lg rounded-lg w-full max-w-3xl mx-auto p-8" onSubmit={handleSubmit}>
         <div className="w-20 h-20 mx-auto mb-6">
           <img src={loginIcon} alt="login icon" className="object-cover" />
         </div>
@@ -46,7 +81,7 @@ const SignUp = () => {
         <div className="flex flex-col md:flex-row md:gap-4">
           {/* First Column */}
           <div className="flex-1">
-            <form className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4">
               <div className="grid">
                 <label className="font-medium mb-1">Username:</label>
                 <input
@@ -55,6 +90,18 @@ const SignUp = () => {
                   type="text"
                   placeholder="Enter Username"
                   value={data.username}
+                  onChange={handleOnChange}
+                />
+              </div>
+
+              <div className="grid">
+                <label className="font-medium mb-1">Full Name:</label>
+                <input
+                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  name="fullName"
+                  type="text"
+                  placeholder="Enter your Full Name"
+                  value={data.fullName}
                   onChange={handleOnChange}
                 />
               </div>
@@ -82,12 +129,12 @@ const SignUp = () => {
                   onChange={handleOnChange}
                 />
               </div>
-            </form>
+            </div>
           </div>
 
           {/* Second Column */}
           <div className="flex-1">
-            <form className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4">
               <div className="grid">
                 <label className="font-medium mb-1">Email:</label>
                 <input
@@ -129,7 +176,7 @@ const SignUp = () => {
                     name="confirmPassword"
                     type={showConfirmPassword ? "text" : "password"}
                     placeholder="Confirm password"
-                    value={data.confirmPassword}
+                    value={data.confirmPassword || ""}
                     onChange={handleOnChange}
                   />
                   <button
@@ -141,8 +188,10 @@ const SignUp = () => {
                   </button>
                 </div>
               </div>
-            </form>
+            </div>
 
+          </div>
+        </div>
             <p className="my-5 text-center">
               Already have an Account?
               <Link
@@ -153,13 +202,11 @@ const SignUp = () => {
                 Login
               </Link>
             </p>
-          </div>
-        </div>
 
         <button className="bg-blue-500 hover:bg-blue-700 text-white px-6 py-2 w-full rounded-full transition-all duration-200 transform hover:scale-105 mt-6">
           Create Account
         </button>
-      </div>
+      </form>
     </section>
   );
 };

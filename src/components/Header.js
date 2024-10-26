@@ -1,18 +1,18 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import Logo from "./Logo";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { Context } from "../context/Context";
+import { CartContext } from "../context/MergedProvider";
 
 const Header = () => {
   // const [menu, setMenu] = useState("home");
+  // const [isSearchFocused, setIsSearchFocused] = useState(false);
+  // const [searchValue, setSearchValue] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isProduct1DropdownOpen, setIsProduct1DropdownOpen] = useState(false);
   const [isProduct2DropdownOpen, setIsProduct2DropdownOpen] = useState(false);
-  const [isSearchFocused, setIsSearchFocused] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
-  const { getTotalCartItems } = useContext(Context);
+  const { getTotalCartItems } = useContext(CartContext);
 
   return (
     <div className=" bg-slate-800 text-white py-3 w-full z-20">
