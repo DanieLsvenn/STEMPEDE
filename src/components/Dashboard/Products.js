@@ -8,9 +8,13 @@ import {
   fetchProducts,
   updateProduct,
 } from "../../api/product";
+import { fetchLabs } from "../../api/lab";
+import { fetchSubcategories } from "../../api/subcatgory";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [labs, setLabs] = useState([]);
+  const [subcategories, setSubcategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null); // For both add/edit
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Modal for delete confirmation
@@ -18,7 +22,8 @@ const Products = () => {
   const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
   const [currentPage, setCurrentPage] = useState(1); // State for current page
   const [productsPerPage] = useState(8); // Number of products per page
-  // Fetch products from API when component mounts
+
+  // Fetch products, labs, and subcategories from API when component mounts
   useEffect(() => {
     const getProducts = async () => {
       const fetchedProducts = await fetchProducts();
@@ -28,8 +33,30 @@ const Products = () => {
         toast.error("Failed to fetch products");
       }
     };
+
+    const getLabs = async () => {
+      const fetchedLabs = await fetchLabs();
+      if (fetchedLabs && fetchedLabs.success) {
+        setLabs(fetchedLabs.data.items);
+      } else {
+        toast.error("Failed to fetch labs");
+      }
+    };
+
+    const getSubcategories = async () => {
+      const fetchedSubcategories = await fetchSubcategories();
+      if (fetchedSubcategories && fetchedSubcategories.success) {
+        setSubcategories(fetchedSubcategories.data);
+      } else {
+        toast.error("Failed to fetch subcategories");
+      }
+    };
+
     getProducts();
+    getLabs();
+    getSubcategories();
   }, []);
+
   // Get current products for pagination
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -49,23 +76,26 @@ const Products = () => {
         : {
             productID: products.length + 1,
             productName: "",
-            brand: "",
-            ages: "",
-            image: "",
-            price: "",
             description: "",
+            price: "",
+            stockQuantity: "",
+            ages: "",
+            supportInstances: "",
+            labID: "",
+            subcategoryID: "",
           } // If adding, start with empty fields
     );
     setIsModalOpen(true); // Open the modal
   };
 
-  const handleImageChange = (event) => {
-    const imageFile = event.target.files[0];
-    setSelectedProduct({ ...selectedProduct, image: imageFile });
+  // const handleImageChange = (event) => {
+  //   const imageFile = event.target.files[0];
+  //   setSelectedProduct({ ...selectedProduct, image: imageFile });
 
-    const imageUrl = URL.createObjectURL(imageFile);
-    setImagePreviewUrl(imageUrl);
-  };
+  //   const imageUrl = URL.createObjectURL(imageFile);
+  //   setImagePreviewUrl(imageUrl);
+  // };
+
   // Save the edited or new product
   const handleSaveProduct = async () => {
     // Check for validation errors
@@ -77,39 +107,45 @@ const Products = () => {
       toast.error("Error!");
       return;
     }
-    const formData = new FormData();
+    const productData = {
+      productName: selectedProduct.productName,
+      description: selectedProduct.description,
+      price: selectedProduct.price,
+      stockQuantity: selectedProduct.stockQuantity,
+      ages: selectedProduct.ages,
+      supportInstances: selectedProduct.supportInstances,
+      labID: selectedProduct.labID,
+      subcategoryID: selectedProduct.subcategoryID,
+    };
 
     try {
-      formData.append("productName", selectedProduct.productName);
-      formData.append("price", selectedProduct.price);
-
       // If an image is selected, append it to the formData
-      if (selectedProduct.image) {
-        formData.append("image", selectedProduct.image);
-      }
+      // if (selectedProduct.image) {
+      //   formData.append("image", selectedProduct.image);
+      // }
       if (selectedProduct.productID <= products.length) {
         // Update existing product
         const updatedProduct = await updateProduct(
           selectedProduct.productID,
-          formData
+          productData
         );
         setProducts(
           products.map((product) =>
             product.productID === selectedProduct.productID
-              ? updatedProduct
+              ? updatedProduct.data
               : product
           )
         );
         toast.success("Product edited successfully!"); // Trigger alert for update
       } else {
         // Add new product
-        const newProduct = await addProduct(formData);
-        setProducts([...products, newProduct]);
+        const newProduct = await addProduct(productData);
+        setProducts([...products, newProduct.data]);
         toast.success("Product added successfully!"); // Trigger alert for adding
       }
       setIsModalOpen(false); // Close modal after saving
     } catch (error) {
-      toast.error("Failed to save product."); // Trigger error alert
+      toast.error(`Failed to save product: ${error.message}`); // Trigger error alert
     }
   };
 
@@ -131,7 +167,7 @@ const Products = () => {
       toast.success("Product deleted successfully!"); // Trigger alert for delete
       setIsDeleteModalOpen(false); // Close the delete confirmation modal
     } catch (error) {
-      toast.error("Failed to delete product."); // Trigger error alert
+      toast.error(`Failed to delete product: ${error.message}`); // Trigger error alert
     }
   };
 
@@ -164,22 +200,30 @@ const Products = () => {
         </thead>
         <tbody>
           {currentProducts.map((product) => (
-            <tr key={product.productID}>
-              <td className="border px-4 py-2">{product.productID}</td>
+            <tr key={product && product.productID}>
               <td className="border px-4 py-2">
-                {product.image && (
+                {product && product.productID}
+              </td>
+              <td className="border px-4 py-2">
+                {/* {product.image && (
                   <img
                     src={product.image}
                     alt={product.productName}
                     className="w-16 h-16 object-cover"
                   />
-                )}
+                )} */}
               </td>
-              <td className="border px-4 py-2">{product.productName}</td>
-              <td className="border px-4 py-2">{product.subcategoryName}</td>
-              <td className="border px-4 py-2">{product.ages}</td>
-              <td className="border px-4 py-2">${product.price}</td>
-              <td className="border px-4 py-2">{product.description}</td>
+              <td className="border px-4 py-2">
+                {product && product.productName}
+              </td>
+              <td className="border px-4 py-2">
+                {product && product.subcategoryName}
+              </td>
+              <td className="border px-4 py-2">{product && product.ages}</td>
+              <td className="border px-4 py-2">${product && product.price}</td>
+              <td className="border px-4 py-2">
+                {product && product.description}
+              </td>
               <td className="border px-4 py-2">
                 <button
                   className="bg-yellow-500 text-white px-4 py-2 mr-2 rounded"
@@ -232,7 +276,7 @@ const Products = () => {
             </h2>
 
             <div className="grid gap-4">
-              <div>
+              {/* <div>
                 <input
                   className="border p-2 w-full"
                   name="image"
@@ -246,33 +290,23 @@ const Products = () => {
                     className="w-16 h-16 object-cover mt-2"
                   />
                 )}
-              </div>
+              </div> */}
               <div>
                 <label>Product Name:</label>
                 <input
                   className="border p-2 w-full"
-                  name="name"
+                  name="productName"
                   value={selectedProduct.productName}
                   onChange={handleInputChange}
                 />
               </div>
 
               <div>
-                <label>Brand:</label>
-                <input
+                <label>Description:</label>
+                <textarea
                   className="border p-2 w-full"
-                  name="brand"
-                  value={selectedProduct.subcategoryName}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              <div>
-                <label>Age Range:</label>
-                <input
-                  className="border p-2 w-full"
-                  name="age"
-                  value={selectedProduct.ages}
+                  name="description"
+                  value={selectedProduct.description}
                   onChange={handleInputChange}
                 />
               </div>
@@ -282,71 +316,126 @@ const Products = () => {
                 <input
                   className="border p-2 w-full"
                   name="price"
-                  type="number"
                   value={selectedProduct.price}
                   onChange={handleInputChange}
                 />
               </div>
 
               <div>
-                <label>Description:</label>
+                <label>Stock Quantity:</label>
                 <input
                   className="border p-2 w-full"
-                  name="description"
-                  type="text"
-                  value={selectedProduct.description}
+                  name="stockQuantity"
+                  value={selectedProduct.stockQuantity}
                   onChange={handleInputChange}
                 />
               </div>
-            </div>
 
-            <div className="mt-4 flex justify-end">
-              <button
-                className="bg-gray-500 text-white px-4 py-2 rounded mr-2"
-                onClick={() => setIsModalOpen(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="bg-blue-500 text-white px-4 py-2 rounded"
-                onClick={handleSaveProduct}
-              >
-                {selectedProduct.productID <= products.length
-                  ? "Save Changes"
-                  : "Add Product"}
-              </button>
+              <div>
+                <label>Age Range:</label>
+                <input
+                  className="border p-2 w-full"
+                  name="ages"
+                  value={selectedProduct.ages}
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div>
+                <label>Support Instances:</label>
+                <input
+                  className="border p-2 w-full"
+                  name="supportInstances"
+                  value={selectedProduct.supportInstances}
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div>
+                <label>Lab:</label>
+                <select
+                  className="border p-2 w-full"
+                  name="labID"
+                  value={selectedProduct.labID}
+                  onChange={handleInputChange}
+                >
+                  <option value="">Select Lab</option>
+                  {labs.map((lab) => (
+                    <option key={lab.labId} value={lab.labId}>
+                      {lab.labName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label>Subcategory:</label>
+                <select
+                  className="border p-2 w-full"
+                  name="subcategoryID"
+                  value={selectedProduct.subcategoryID}
+                  onChange={handleInputChange}
+                >
+                  <option value="">Select Subcategory</option>
+                  {subcategories.map((subcategory) => (
+                    <option
+                      key={subcategory.subcategoryID}
+                      value={subcategory.subcategoryID}
+                    >
+                      {subcategory.subcategoryName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="flex justify-end gap-4">
+                <button
+                  className="bg-gray-500 text-white px-4 py-2 rounded"
+                  onClick={() => setIsModalOpen(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="bg-blue-500 text-white px-4 py-2 rounded"
+                  onClick={handleSaveProduct}
+                >
+                  Save
+                </button>
+              </div>
             </div>
           </div>
         </Modal>
       )}
 
+      {/* Modal for delete confirmation */}
       {isDeleteModalOpen && (
         <Modal
           isOpen={isDeleteModalOpen}
           onRequestClose={() => setIsDeleteModalOpen(false)}
           className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center"
         >
-          <div className="bg-white p-6 rounded shadow-lg w-[400px]">
-            <h2 className="text-xl mb-4">Delete Confirmation</h2>
+          <div className="bg-white p-6 rounded shadow-lg w-[500px]">
+            <h2 className="text-xl mb-4">Confirm Delete</h2>
             <p>Are you sure you want to delete this product?</p>
-            <div className="mt-4 flex justify-end">
-              <button
-                className="bg-gray-500 text-white px-4 py-2 rounded mr-2"
-                onClick={() => setIsDeleteModalOpen(false)}
-              >
-                Cancel
-              </button>
+            <div className="flex justify-end gap-4 mt-4">
               <button
                 className="bg-red-500 text-white px-4 py-2 rounded"
                 onClick={handleConfirmDelete}
               >
-                Confirm
+                Delete
+              </button>
+              <button
+                className="bg-gray-500 text-white px-4 py-2 rounded"
+                onClick={() => setIsDeleteModalOpen(false)}
+              >
+                Cancel
               </button>
             </div>
           </div>
         </Modal>
       )}
-      <ToastContainer autoClose={2000} />
+
+      <ToastContainer />
     </div>
   );
 };

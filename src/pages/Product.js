@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoMdAddCircle } from "react-icons/io";
-import { CartContext } from '../context/MergedProvider.js';
+import { CartContext } from "../context/MergedProvider.js";
 import { fetchProducts } from "../api/product.js";
 
 const Product = () => {
@@ -26,7 +26,7 @@ const Product = () => {
       }
     };
     getProducts();
-  }, [products]);
+  }, []);
 
   // Filter products by search term and selected subcategory
   const filteredProducts = products.filter((product) => {

@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 import Users from "./Users";
-import Staffs from './Staffs'
+import Staffs from "./Staffs";
 import Orders from "./Orders";
 import Card from "./Card";
 import { FaUsers, FaShoppingCart, FaDollarSign } from "react-icons/fa";
 import { LineChart, BarChart } from "./Charts";
 import Products from "./Products";
+import Labs from "./Labs";
 
 const Dashboard = () => {
   const [selectedSection, setSelectedSection] = useState("dashboard");
@@ -17,11 +18,13 @@ const Dashboard = () => {
       case "userManagement":
         return <Users />;
       case "staffManagement":
-        return <Staffs />
+        return <Staffs />;
       case "orderManagement":
         return <Orders />;
       case "productManagement":
         return <Products />;
+      case "labManagement":
+        return <Labs />;
       default:
         return (
           <>
