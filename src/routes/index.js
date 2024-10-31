@@ -13,10 +13,20 @@ import ProductPage from "../pages/ProductPage";
 import Documentation from "../pages/Documentation";
 import Profile from "../pages/Profile";
 import LabSpecial from "../pages/LabSpecial";
+import RequireAuth from "../components/RequireAuth";
+import PersistLogin from "../components/PersistLogin";
+
+const ROLES = {
+  Customer: "Customer",
+  Manager: "Manager",
+  Staff: "Staff"
+}
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    //public routes
     children: [
       {
         path: "",
@@ -48,31 +58,37 @@ const router = createBrowserRouter([
           },
           {
             path: "",
-            element: <Product />,
+            element: <Product />
           },
         ],
-      },
-      {
-        path: "cart",
-        element: <Cart />,
       },
       {
         path: "documentation",
         element: <Documentation />,
       },
       {
-        path: "/profile",
-        element: <Profile />,
-      },
-      {
         path: "/labspecial",
         element: <LabSpecial />,
+      },
+      //protected routes
+      {
+        path: "cart",
+        element: <RequireAuth allowedRoles={[ROLES.Customer]}><Cart /></RequireAuth>
+      },
+      {
+        path: "/profile",
+        element: <RequireAuth allowedRoles={[ROLES.Customer]}><Profile /></RequireAuth>
       },
     ],
   },
   {
     path: "/dashboard",
-    element: <DashboardPage />,
+    element:
+            <PersistLogin>
+              <RequireAuth allowedRoles={[ROLES.Manager, ROLES.Staff]}>
+                <DashboardPage />
+              </RequireAuth>,
+            </PersistLogin> 
   },
 ]);
 

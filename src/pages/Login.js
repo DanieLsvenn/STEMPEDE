@@ -1,22 +1,30 @@
-import React, { useState, useContext } from "react";
-import { AuthContext } from "../context/MergedProvider";
+// import React, { useState, useContext } from "react";
+// import { AuthContext } from "../context/MergedProvider";
+import React, { useState } from "react";
 import loginIcon from "../assets/signin.gif";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from '../api/axios';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import useAuth from "../hooks/useAuth";
 
 
 const LOGIN_URL = 'api/Auth/login'
 
 const Login = () => {
 
-  const { setAuth } = useContext(AuthContext);
+  // const { setAuth } = useContext(AuthContext);
+  const { setAuth } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
     emailOrUsername: "",
-    password: "",
+    password: "", 
   });
 
   const handleOnChange = (e) => {
@@ -32,27 +40,33 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-     // Simulate authentication logic
-     const user = data.emailOrUsername; // Replace with actual user data
-     const pwd = data.password; // Replace with actual password data
     
     try {
       const response = await axios.post(LOGIN_URL,
-        JSON.stringify({ ...data }),
+        JSON.stringify(data),
         {
-          headers: { 'Content-Type': 'application/json'},
+          headers: { 'Content-Type': 'application/json' },
           withCredentials: true
         }
       );
 
       console.log(JSON.stringify(response?.data));
-      const accessToken = response?.data?.accessToken;
-      const roles = response?.data?.roles;
-      setAuth({ user, pwd, roles, accessToken })
+      const accessToken = response?.data?.data?.token; // Adjusted to match your response structure
+      const refreshToken = response?.data?.data?.refreshToken; // Get the refresh token
+      const roles = response?.data?.data?.roles; // Adjust if roles are part of the response
+
+      // Store tokens in local storage
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+
+      // Update auth context
+      setAuth({ user: data.emailOrUsername, roles, accessToken, refreshToken });
+
       setData({ emailOrUsername: "", password: "" });
       toast.success("Login successful!");
+      navigate(from, { replace: true });
 
-    } catch(error) {
+    } catch (error) {
       if (!error?.response) {
         toast.error("No Server Response");
       } else if (error.response?.status === 400) {
@@ -62,11 +76,8 @@ const Login = () => {
       } else {
         toast.error("Login Failed");
       }
-      
     }
-  }
-
-  const handleLogIn = () => {};
+  };
 
   return (
     <section
@@ -81,6 +92,7 @@ const Login = () => {
           </h1>
         </div>
       </div>
+
       <div className="bg-white shadow-lg rounded-lg w-full max-w-3xl mx-auto p-6">
         <div className="w-20 h-20 mx-auto mb-6">
           <img src={loginIcon} alt="login icon" className="object-cover" />
@@ -122,6 +134,7 @@ const Login = () => {
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
+            
             <Link
               className="block w-fit mt-1 ml-auto text-blue-500 hover:underline hover:text-blue-700"
               to={"/forgot-password"}
@@ -131,7 +144,7 @@ const Login = () => {
           </div>
 
           <button
-            onSubmit={handleLogIn}
+            type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white px-6 py-2 w-full rounded-full transition-all duration-200 transform hover:scale-105"
           >
             Login

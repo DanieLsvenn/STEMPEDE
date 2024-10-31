@@ -15,14 +15,20 @@ const Product = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      const fetchedProducts = await fetchProducts();
-      if (
-        fetchedProducts.success &&
-        Array.isArray(fetchedProducts.data.items)
-      ) {
-        setProducts(fetchedProducts.data.items);
-      } else {
-        console.error("Fetched products is not an array:", fetchedProducts);
+      try {
+        const fetchedProducts = await fetchProducts();
+        // Check if fetchedProducts is defined and has the expected structure
+        if (
+          fetchedProducts &&
+          fetchedProducts.success &&
+          Array.isArray(fetchedProducts.data.items)
+        ) {
+          setProducts(fetchedProducts.data.items);
+        } else {
+          console.error("Fetched products is not an array or is undefined:", fetchedProducts);
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
       }
     };
     getProducts();
