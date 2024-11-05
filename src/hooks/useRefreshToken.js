@@ -6,21 +6,22 @@ const useRefreshToken = () => {
 
     const refresh = async () => {
         const refreshToken = localStorage.getItem('refreshToken');
-        const response = await axios.post('/api/Auth/refresh', {
-            refreshToken, // Send the refresh token in the request body
-        }, {
-            withCredentials: true
-        });
-        setAuth(prev => {
-            console.log(JSON.stringify(prev));
-            console.log(response.data.accessToken);
-            return { 
+        try {
+            const response = await axios.post('https://localhost:7231/swagger/api/Auth/refresh', {
+                refreshToken, // Send the refresh token in the request body
+            }, {
+                withCredentials: false
+            });
+            setAuth(prev => ({
                 ...prev,
                 roles: response.data.roles,
                 accessToken: response.data.accessToken
-            }
-        });
-        return response.data.accessToken;
+            }));
+            return response.data.accessToken;
+        } catch (error) {
+            console.error("Failed to refresh token:", error);
+            // Handle token refresh failure (e.g., redirect to login)
+        }
     }
     return refresh;
 };

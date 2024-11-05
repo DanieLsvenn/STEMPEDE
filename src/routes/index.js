@@ -17,78 +17,59 @@ import RequireAuth from "../components/RequireAuth";
 import PersistLogin from "../components/PersistLogin";
 
 const ROLES = {
-  Customer: "Customer",
-  Manager: "Manager",
-  Staff: "Staff"
+  Customer: 'Customer',
+  Manager: 'Manager',
+  Staff: 'Staff'
 }
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
-    //public routes
+    element: <App />, // App serves as the layout container
     children: [
-      {
-        path: "",
-        element: <Home />,
-      },
-      {
-        path: "login",
-        element: <Login />,
-      },
-      {
-        path: "forgot-password",
-        element: <ForgotPassword />,
-      },
-      {
-        path: "sign-up",
-        element: <SignUp />,
-      },
-      {
-        path: "shop-category/:category",
-        element: <ShopCategory />,
-      },
+      // Public routes
+      { path: "", element: <Home /> },
+      { path: "login", element: <Login /> },
+      { path: "forgot-password", element: <ForgotPassword /> },
+      { path: "sign-up", element: <SignUp /> },
+      { path: "shop-category/:category", element: <ShopCategory /> },
       {
         path: "product",
         element: <ProductPage />,
         children: [
           {
             path: ":productId",
-            element: <ProductDetail />,
+            element: (
+                <ProductDetail />
+            ),
           },
-          {
-            path: "",
-            element: <Product />
-          },
+          { path: "", element: <Product /> },
         ],
       },
+      { path: "documentation", element: <Documentation /> },
+      { path: "labspecial", element: <LabSpecial /> },
+
+      // Protected routes wrapped in PersistLogin and RequireAuth for authorization
       {
-        path: "documentation",
-        element: <Documentation />,
-      },
-      {
-        path: "/labspecial",
-        element: <LabSpecial />,
-      },
-      //protected routes
-      {
-        path: "cart",
-        element: <RequireAuth allowedRoles={[ROLES.Customer]}><Cart /></RequireAuth>
-      },
-      {
-        path: "/profile",
-        element: <RequireAuth allowedRoles={[ROLES.Customer]}><Profile /></RequireAuth>
+        element: (
+            <RequireAuth allowedRoles={[ROLES.Customer, ROLES.Manager, ROLES.Staff]} />
+        ),
+        children: [
+          { path: "cart", element: <Cart /> },
+          { path: "profile", element: <Profile /> },
+        ],
       },
     ],
   },
+
   {
     path: "/dashboard",
-    element:
-            <PersistLogin>
-              <RequireAuth allowedRoles={[ROLES.Manager, ROLES.Staff]}>
-                <DashboardPage />
-              </RequireAuth>,
-            </PersistLogin> 
+    element: (
+        <RequireAuth allowedRoles={[ROLES.Manager, ROLES.Staff]} />
+    ),
+    children: [
+      { index: true, element: <DashboardPage /> }, // Default route for /dashboard
+    ],
   },
 ]);
 

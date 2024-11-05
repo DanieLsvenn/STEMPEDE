@@ -46,14 +46,14 @@ const Login = () => {
         JSON.stringify(data),
         {
           headers: { 'Content-Type': 'application/json' },
-          withCredentials: true
+          withCredentials: false
         }
       );
 
       console.log(JSON.stringify(response?.data));
-      const accessToken = response?.data?.data?.token; // Adjusted to match your response structure
-      const refreshToken = response?.data?.data?.refreshToken; // Get the refresh token
-      const roles = response?.data?.data?.roles; // Adjust if roles are part of the response
+      const accessToken = response?.data?.data?.token;
+      const refreshToken = response?.data?.data?.refreshToken; 
+      const roles = response?.data?.data?.roles.map(role => role.trim());
 
       // Store tokens in local storage
       localStorage.setItem('accessToken', accessToken);

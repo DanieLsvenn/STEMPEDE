@@ -9,6 +9,12 @@ import { FaUsers, FaShoppingCart, FaDollarSign } from "react-icons/fa";
 import { LineChart, BarChart } from "./Charts";
 import Products from "./Products";
 import Labs from "./Labs";
+import RequireAuth from "../RequireAuth";
+
+const ROLES = {
+  Manager: 'Manager',
+  Staff: 'Staff'
+}
 
 const Dashboard = () => {
   const [selectedSection, setSelectedSection] = useState("dashboard");
