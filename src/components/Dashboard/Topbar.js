@@ -10,34 +10,7 @@ const Topbar = () => {
   };
 
   return (
-    <div className="flex justify-between items-center bg-white dark:bg-gray-800 p-4 shadow-md">
-      {/* Breadcrumbs */}
-      <nav className="text-sm font-medium text-gray-500 dark:text-gray-300">
-        <ol className="list-reset flex">
-          <li>
-            <a href="#" className="text-blue-500">
-              General
-            </a>
-          </li>
-          <li>
-            <span className="mx-2">/</span>
-          </li>
-          <li>Manage ...</li>
-        </ol>
-      </nav>
-
-      {/* Search Bar */}
-      <div className="relative w-1/3">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="w-full py-2 px-4 bg-gray-100 dark:bg-gray-700 rounded-lg text-sm focus:outline-none text-gray-600 dark:text-gray-300"
-        />
-        <span className="absolute top-2 right-4 text-gray-500">
-          <FontAwesomeIcon icon={faSearch} />
-        </span>
-      </div>
-
+    <div className="flex justify-end items-center bg-white dark:bg-gray-800 p-4 shadow-md">
       {/* Right Actions: Dark Mode Toggle, Notifications, User Dropdown */}
       <div className="flex items-center space-x-6">
         <ToggleDarkMode />
