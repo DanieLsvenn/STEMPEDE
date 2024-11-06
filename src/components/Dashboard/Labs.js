@@ -11,21 +11,22 @@ const Labs = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Modal for delete confirmation
   const [labToDelete, setLabToDelete] = useState(null);
   const [currentPage, setCurrentPage] = useState(1); // State for current page
-  const [labsPerPage] = useState(8); // Number of labs per page
+  const [labsPerPage] = useState(4); // Number of labs per page
 
   // Fetch labs from API when component mounts
   useEffect(() => {
-    const getLabs = async () => {
-      const fetchedLabs = await fetchLabs();
-      if (fetchedLabs && fetchedLabs.success) {
-        setLabs(fetchedLabs.data.items);
-      } else {
-        toast.error("Failed to fetch labs");
-      }
-    };
-
-    getLabs();
+    fetchAndSetLabs();
   }, []);
+
+  // Function to fetch and set labs
+  const fetchAndSetLabs = async () => {
+    const fetchedLabs = await fetchLabs();
+    if (fetchedLabs && fetchedLabs.success) {
+      setLabs(fetchedLabs.data.items);
+    } else {
+      toast.error("Failed to fetch labs");
+    }
+  };
 
   // Get current labs for pagination
   const indexOfLastLab = currentPage * labsPerPage;
@@ -66,18 +67,24 @@ const Labs = () => {
     try {
       if (selectedLab.labID <= labs.length) {
         // Update existing lab
-        const updatedLab = await updateLab(selectedLab.labID, labData);
-        setLabs(
-          labs.map((lab) =>
-            lab.labID === selectedLab.labID ? updatedLab.data : lab
-          )
-        );
-        toast.success("Lab edited successfully!"); // Trigger alert for update
+        const response = await updateLab(selectedLab.labID, labData);
+        console.log("Update Response:", response);
+        if (response.success) {
+          await fetchAndSetLabs(); // Refetch labs
+          toast.success("Lab edited successfully!"); // Trigger alert for update
+        } else {
+          toast.error("Failed to update lab");
+        }
       } else {
         // Add new lab
-        const newLab = await addLab(labData);
-        setLabs([...labs, newLab.data]);
-        toast.success("Lab added successfully!"); // Trigger alert for adding
+        const response = await addLab(labData);
+        console.log("Add Response:", response);
+        if (response.success) {
+          await fetchAndSetLabs(); // Refetch labs
+          toast.success("Lab added successfully!"); // Trigger alert for adding
+        } else {
+          toast.error("Failed to add lab");
+        }
       }
       setIsModalOpen(false); // Close modal after saving
     } catch (error) {

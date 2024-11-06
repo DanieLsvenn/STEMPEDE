@@ -21,7 +21,7 @@ const Products = () => {
   const [productToDelete, setProductToDelete] = useState(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
   const [currentPage, setCurrentPage] = useState(1); // State for current page
-  const [productsPerPage] = useState(8); // Number of products per page
+  const [productsPerPage] = useState(4); // Number of products per page
 
   // Fetch products, labs, and subcategories from API when component mounts
   useEffect(() => {
@@ -119,29 +119,29 @@ const Products = () => {
     };
 
     try {
-      // If an image is selected, append it to the formData
-      // if (selectedProduct.image) {
-      //   formData.append("image", selectedProduct.image);
-      // }
       if (selectedProduct.productID <= products.length) {
         // Update existing product
-        const updatedProduct = await updateProduct(
+        const response = await updateProduct(
           selectedProduct.productID,
           productData
         );
-        setProducts(
-          products.map((product) =>
-            product.productID === selectedProduct.productID
-              ? updatedProduct.data
-              : product
-          )
-        );
-        toast.success("Product edited successfully!"); // Trigger alert for update
+        console.log("Update Response:", response);
+        if (response.success) {
+          await fetchAndSetProducts(); // Refetch products
+          toast.success("Product edited successfully!"); // Trigger alert for update
+        } else {
+          toast.error("Failed to update product");
+        }
       } else {
         // Add new product
-        const newProduct = await addProduct(productData);
-        setProducts([...products, newProduct.data]);
-        toast.success("Product added successfully!"); // Trigger alert for adding
+        const response = await addProduct(productData);
+        console.log("Add Response:", response);
+        if (response.success) {
+          await fetchAndSetProducts(); // Refetch products
+          toast.success("Product added successfully!"); // Trigger alert for adding
+        } else {
+          toast.error("Failed to add product");
+        }
       }
       setIsModalOpen(false); // Close modal after saving
     } catch (error) {
@@ -149,6 +149,15 @@ const Products = () => {
     }
   };
 
+  // Function to fetch and set products
+  const fetchAndSetProducts = async () => {
+    const fetchedProducts = await fetchProducts();
+    if (fetchedProducts && fetchedProducts.success) {
+      setProducts(fetchedProducts.data.items);
+    } else {
+      toast.error("Failed to fetch products");
+    }
+  };
   // Handle delete button click
   const openDeleteModal = (product) => {
     setProductToDelete(product); // Set the product to be deleted

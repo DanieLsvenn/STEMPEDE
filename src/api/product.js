@@ -54,6 +54,7 @@ async function updateProduct(productId, productData) {
         },
       }
     );
+
     return response.data;
   } catch (error) {
     console.error(`Update product ${productId} failed:`, error);
@@ -63,8 +64,8 @@ async function updateProduct(productId, productData) {
 // Xóa một sản phẩm
 async function deleteProduct(productId) {
   try {
-    await axios.delete(`${API_URL}/${productId}`);
-    return "Product deleted successfully";
+    const response = await axios.delete(`${API_URL}/${productId}`);
+    return response.data;
   } catch (error) {
     console.error(`Delete product ${productId} failed:`, error);
   }
