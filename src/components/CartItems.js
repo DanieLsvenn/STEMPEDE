@@ -5,8 +5,14 @@ import { RxCross2 } from "react-icons/rx";
 import { RiArrowLeftDoubleFill } from "react-icons/ri";
 
 const CartItems = () => {
-  const { products, cartItems, removeFromCart, getTotalCartAmount, updateCartItemQuantity } =
-    useContext(CartContext);
+  const {
+    products,
+    cartItems,
+    removeFromCart,
+    getTotalCartAmount,
+    updateCartItemQuantity,
+  } = useContext(CartContext);
+  console.log(products);
   return (
     <div className="cartitems">
       <div className="cartitems-format-main">
@@ -19,26 +25,35 @@ const CartItems = () => {
       </div>
       <hr />
       {products.map((e) => {
-      if (cartItems[e.id] > 0) { // Change e.productID to e.id
+        if (cartItems[e.id] > 0) {
+          // Change e.productID to e.id
           return (
-              <div key={e.id}> // Change e.productID to e.id
-                  <div className="cartitems-format cartitems-format-main">
-                      <img src={e.image} alt="" className="carticon-product-icon" />
-                      <p>{e.productName}</p>
-                      <p>${e.price}</p>
-                      <button className="cartitems-quantity" onClick={() => updateCartItemQuantity(e.id, cartItems[e.id] + 1)}>
-                          {cartItems[e.id]} // Change e.productID to e.id
-                      </button>
-                      <p>${e.price * cartItems[e.id]}</p> // Change e.productID to e.id
-                      <RxCross2
-                          onClick={() => {
-                              removeFromCart(e.id); // Change e.productID to e.id
-                          }}
-                      />
-                  </div>
+            <div key={e.id}>
+              {" "}
+              // Change e.productID to e.id
+              <div className="cartitems-format cartitems-format-main">
+                <img src={e.image} alt="" className="carticon-product-icon" />
+                <p>{e.productName}</p>
+                <p>${e.price}</p>
+                <button
+                  className="cartitems-quantity"
+                  onClick={() =>
+                    updateCartItemQuantity(e.id, cartItems[e.id] + 1)
+                  }
+                >
+                  {cartItems[e.id]} // Change e.productID to e.id
+                </button>
+                <p>${e.price * cartItems[e.id]}</p> // Change e.productID to
+                e.id
+                <RxCross2
+                  onClick={() => {
+                    removeFromCart(e.id); // Change e.productID to e.id
+                  }}
+                />
               </div>
+            </div>
           );
-      }
+        }
         return null;
       })}
       <div className="cartitems-down">
