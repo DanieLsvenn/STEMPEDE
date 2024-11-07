@@ -13,8 +13,6 @@ import useAuth from "../hooks/useAuth";
 const LOGIN_URL = 'api/Auth/login'
 
 const Login = () => {
-
-  // const { setAuth } = useContext(AuthContext);
   const { setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();

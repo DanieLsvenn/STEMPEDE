@@ -5,18 +5,16 @@ const useRefreshToken = () => {
     const { setAuth } = useAuth();
 
     const refresh = async () => {
-        const refreshToken = localStorage.getItem('refreshToken');
+        // const refreshToken = localStorage.getItem('refreshToken');
         try {
             const response = await axios.post('https://localhost:7231/swagger/api/Auth/refresh', {
-                refreshToken, // Send the refresh token in the request body
-            }, {
-                withCredentials: false
+                withCredentials: true
             });
-            setAuth(prev => ({
-                ...prev,
-                roles: response.data.roles,
-                accessToken: response.data.accessToken
-            }));
+            setAuth(prev => {
+                console.log(JSON.stringify(prev));
+                console.log(response.data.accessToken);
+                return { ...prev, accessToken: response.data.accessToken }
+            });
             return response.data.accessToken;
         } catch (error) {
             console.error("Failed to refresh token:", error);
