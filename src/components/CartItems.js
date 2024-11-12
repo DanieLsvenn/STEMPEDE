@@ -13,6 +13,9 @@ const CartItems = () => {
     updateCartItemQuantity,
   } = useContext(CartContext);
   console.log(products);
+  console.log(cartItems);
+
+  
   return (
     <div className="cartitems">
       <div className="cartitems-format-main">
@@ -24,13 +27,13 @@ const CartItems = () => {
         <p>Remove</p>
       </div>
       <hr />
-      {products.map((e) => {
-        if (cartItems[e.id] > 0) {
+      {products?.map((e) => {
+        if (cartItems[e.productID] > 0) {
           // Change e.productID to e.id
           return (
-            <div key={e.id}>
+            <div key={e.productID}>
               {" "}
-              // Change e.productID to e.id
+              
               <div className="cartitems-format cartitems-format-main">
                 <img src={e.image} alt="" className="carticon-product-icon" />
                 <p>{e.productName}</p>
@@ -38,23 +41,22 @@ const CartItems = () => {
                 <button
                   className="cartitems-quantity"
                   onClick={() =>
-                    updateCartItemQuantity(e.id, cartItems[e.id] + 1)
+                    updateCartItemQuantity(e.productID, cartItems[e.productID] + 1)
                   }
                 >
-                  {cartItems[e.id]} // Change e.productID to e.id
+                  {cartItems[e.productID]} 
                 </button>
-                <p>${e.price * cartItems[e.id]}</p> // Change e.productID to
+                <p>${e.price * cartItems[e.productID]}</p>
                 e.id
                 <RxCross2
                   onClick={() => {
-                    removeFromCart(e.id); // Change e.productID to e.id
+                    removeFromCart(e.productID); // Change e.productID to e.id
                   }}
                 />
               </div>
             </div>
           );
         }
-        return null;
       })}
       <div className="cartitems-down">
         <div className="cartitems-total">

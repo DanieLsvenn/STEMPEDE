@@ -2,21 +2,23 @@ import { useLocation, Navigate, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 const RequireAuth = ({ allowedRoles }) => {
-    const { auth } = useAuth();
+    const { user, roles, accessToken, refreshToken } = JSON.parse(localStorage.getItem("currentUser")) || {};
     const location = useLocation();
-
-    console.log("Auth object:", auth);
-    console.log("User roles:", auth.roles);
-    console.log("User: ", auth?.user);
+    console.log("Auth object:", user);
+    console.log("User roles:", roles);
+    console.log("User: ", user);
     console.log("Allowed roles:", allowedRoles);
-    console.log("Current auth state:", auth);
-
+    console.log("Current auth state:", user);
+    const isTokenExpired = () => {
+        const expirationTime = localStorage.getItem('accessTokenExpiration');
+        return expirationTime ? Date.now() > expirationTime : true; // Return true if expired or not set
+      };
     // Check if the user has any of the allowed roles
-    if (auth?.user) {
-        const hasAccess = auth.roles?.some(role => allowedRoles.includes(role));
+    if (user && accessToken) {
+        const hasAccess = roles?.some(role => allowedRoles.includes(role));
         console.log("Has Access:", hasAccess);
         
-        if (hasAccess) {
+        if (hasAccess && !isTokenExpired()) {
             console.log("Access granted: User has the required role.");
             return <Outlet />; // Render the child components
         } else {

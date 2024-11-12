@@ -31,9 +31,9 @@ import Documentation from "./pages/Documentation";
 import Profile from "./pages/Profile";
 import LabSpecial from "./pages/LabSpecial";
 import RequireAuth from "./components/RequireAuth";
-import PersistLogin from "./components/PersistLogin";
 import { Routes, Route } from 'react-router-dom';
 import Layout from "./routes/Layout";
+import useAuth from "./hooks/useAuth";
 
 const ROLES = {
   Customer: 'Customer',
@@ -42,6 +42,7 @@ const ROLES = {
 }
 
 function App() {
+  const accessToken = localStorage.getItem("accessToken")
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -61,7 +62,7 @@ function App() {
         {/* protected routes */}
         <Route element={<RequireAuth allowedRoles={[ROLES.Customer, ROLES.Manager, ROLES.Staff]}/>}>
           <Route path="cart" element={<Cart/>} />
-          <Route path="profile" element={<Profile/>} />
+          <Route path="profile" element={accessToken ? <Profile/> : <Login />} />
         </Route>
         <Route element={<RequireAuth allowedRoles={[ROLES.Manager, ROLES.Staff]}/>}>
           <Route path="dashboard" element={<DashboardPage/>} />

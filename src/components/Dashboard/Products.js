@@ -10,6 +10,8 @@ import {
 } from "../../api/product";
 import { fetchLabs } from "../../api/lab";
 import { fetchSubcategories } from "../../api/subcatgory";
+import useRefreshToken from "../../hooks/useRefreshToken";
+import useAuth from "../../hooks/useAuth";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -22,7 +24,9 @@ const Products = () => {
   const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
   const [currentPage, setCurrentPage] = useState(1); // State for current page
   const [productsPerPage] = useState(8); // Number of products per page
-
+  const refresh = useRefreshToken();
+  const { auth } = useAuth();
+  console.log(auth);
   // Fetch products, labs, and subcategories from API when component mounts
   useEffect(() => {
     const getProducts = async () => {
@@ -178,6 +182,7 @@ const Products = () => {
 
   return (
     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mt-6">
+      <button onClick={() => refresh(auth.refreshToken)}>refresh</button>
       <h2 className="text-xl font-bold mb-4">Manage Products</h2>
       <button
         className="bg-green-500 text-white px-4 py-2 rounded"

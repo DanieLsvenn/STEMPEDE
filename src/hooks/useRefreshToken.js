@@ -11,12 +11,9 @@ const useRefreshToken = () => {
         "https://localhost:7231/api/Auth/refresh",
         {
           withCredentials: false,
+          refreshToken: token,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        
       );
       setAuth((prev) => {
         console.log(JSON.stringify(prev));

@@ -23,16 +23,36 @@ const MergedProvider = ({ children }) => {
   const refreshToken = localStorage.getItem("refreshToken");
   // Fetch products on mount
   useEffect(() => {
+    const getProducts = async () => {
+      const fetchedProducts = await fetchProducts();
+      console.log(fetchProducts);
+      if (
+        fetchedProducts &&
+        fetchedProducts.data &&
+        Array.isArray(fetchedProducts.data.items)
+      ) {
+        setProducts(fetchedProducts.data.items);
+        
+      } else {
+        console.error(
+          "Failed to fetch products or products data is not an array:",
+          fetchedProducts
+        );
+      }
+    };
+
     const getProductsAndCart = async () => {
+      
       try {
         const fetchedCart = await fetchCurrentUserCart(token);
         console.log(fetchedCart);
         if (fetchedCart && fetchedCart.success) {
           const cartItems = {};
           fetchedCart.data.items.forEach((item) => {
-            cartItems[item.productId] = item.quantity;
+            cartItems[item.productId] = item;
           });
           setCartItems(cartItems);
+          console.log(cartItems)
         } else {
           console.error("Failed to fetch cart:", fetchedCart);
         }
@@ -48,6 +68,7 @@ const MergedProvider = ({ children }) => {
         }
       }
     };
+    getProducts();
     getProductsAndCart();
   }, []);
 
@@ -90,8 +111,8 @@ const MergedProvider = ({ children }) => {
   const getTotalCartItems = () => {
     let totalItem = 0;
     for (const item in cartItems) {
-      if (cartItems[item] > 0) {
-        totalItem += cartItems[item];
+      if (cartItems[item.quantity] > 0) {
+        totalItem += cartItems[item.quantity];
       }
     }
     return totalItem;

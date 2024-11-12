@@ -8,12 +8,12 @@ import axios from '../api/axios';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import useAuth from "../hooks/useAuth";
-
+import { jwtDecode } from "jwt-decode";
 
 const LOGIN_URL = 'api/Auth/login'
 
 const Login = () => {
-  const { setAuth } = useAuth();
+  const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -50,16 +50,19 @@ const Login = () => {
 
       console.log(JSON.stringify(response?.data));
       const accessToken = response?.data?.data?.token;
+      const decodedToken = jwtDecode(accessToken); // Decode the token
+      const expirationTime = decodedToken.exp * 1000; // Convert to milliseconds
       const refreshToken = response?.data?.data?.refreshToken; 
       const roles = response?.data?.data?.roles.map(role => role.trim());
 
       // Store tokens in local storage
       localStorage.setItem('accessToken', accessToken);
+      // localStorage.setItem('accessTokenExpiration', Date.now() + 10 * 60 * 1000); // Store expiration time (10 minutes from now)
       localStorage.setItem('refreshToken', refreshToken);
-
+      
       // Update auth context
       setAuth({ user: data.emailOrUsername, roles, accessToken, refreshToken });
-
+      localStorage.setItem('currentUser', JSON.stringify({ user: data.emailOrUsername, roles, accessToken, refreshToken }));
       setData({ emailOrUsername: "", password: "" });
       toast.success("Login successful!");
       navigate(from, { replace: true });
